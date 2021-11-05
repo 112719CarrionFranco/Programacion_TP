@@ -40,9 +40,11 @@ namespace TransporteFront.gui
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dgvCamiones = new System.Windows.Forms.DataGridView();
             this.patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pesoMax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carga = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechab = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCamiones)).BeginInit();
@@ -77,6 +79,7 @@ namespace TransporteFront.gui
             this.btnBuscar.TabIndex = 8;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // label4
             // 
@@ -117,7 +120,7 @@ namespace TransporteFront.gui
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(266, 178);
+            this.btnEditar.Location = new System.Drawing.Point(615, 178);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 2;
@@ -126,31 +129,44 @@ namespace TransporteFront.gui
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(173, 178);
+            this.btnEliminar.Location = new System.Drawing.Point(517, 178);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // dgvCamiones
             // 
             this.dgvCamiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCamiones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patente,
+            this.marca,
+            this.modelo,
             this.estado,
             this.pesoMax,
-            this.carga});
-            this.dgvCamiones.Location = new System.Drawing.Point(173, 22);
+            this.fechab});
+            this.dgvCamiones.Location = new System.Drawing.Point(44, 22);
             this.dgvCamiones.Name = "dgvCamiones";
             this.dgvCamiones.RowTemplate.Height = 25;
-            this.dgvCamiones.Size = new System.Drawing.Size(444, 150);
+            this.dgvCamiones.Size = new System.Drawing.Size(646, 150);
             this.dgvCamiones.TabIndex = 0;
             // 
             // patente
             // 
             this.patente.HeaderText = "Patente";
             this.patente.Name = "patente";
+            // 
+            // marca
+            // 
+            this.marca.HeaderText = "Marca";
+            this.marca.Name = "marca";
+            // 
+            // modelo
+            // 
+            this.modelo.HeaderText = "Modelo";
+            this.modelo.Name = "modelo";
             // 
             // estado
             // 
@@ -162,10 +178,10 @@ namespace TransporteFront.gui
             this.pesoMax.HeaderText = "Peso Maximo";
             this.pesoMax.Name = "pesoMax";
             // 
-            // carga
+            // fechab
             // 
-            this.carga.HeaderText = "Carga";
-            this.carga.Name = "carga";
+            this.fechab.HeaderText = "Fecha Baja";
+            this.fechab.Name = "fechab";
             // 
             // Frm_Consultar_Flota
             // 
@@ -194,11 +210,13 @@ namespace TransporteFront.gui
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvCamiones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pesoMax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn carga;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox txtEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pesoMax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechab;
     }
 }

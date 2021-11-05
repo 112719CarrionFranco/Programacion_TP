@@ -451,45 +451,69 @@ namespace TransporteBack.AccesoADatos
             return resultado;
         }
 
-        public List<Camion> GetCamiones(List<Parametro> criterios)
+        
+
+        public DataTable ConsultaTablaParam(string storeName, List<Parametro> criterios)
         {
             List<Camion> lst = new List<Camion>();
-            DataTable table = new DataTable();
+            DataTable tabla = new DataTable();
             SqlConnection cnn = new SqlConnection();
             cnn.ConnectionString = cadenaConexion;
+
             try
             {
                 cnn.Open();
 
-                SqlCommand cmd = new SqlCommand("[SP_CONSULTAR_CAMIONES]", cnn);
+                SqlCommand cmd = new SqlCommand(storeName, cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                foreach (Parametro p in criterios)
+
+                foreach (Parametro param in criterios)
                 {
-                    cmd.Parameters.AddWithValue(p.Nombre, p.Valor);
+                    if (param.Valor == null)
+                        cmd.Parameters.AddWithValue(param.Nombre, DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue(param.Nombre, param.Valor.ToString());
                 }
 
-                table.Load(cmd.ExecuteReader());
-                //mappear los registros como objetos del dominio:
-
-                foreach (DataRow row in table.Rows)
-                {
-                    //Por cada registro creamos un objeto del dominio
-                    Camion oCamion = new Camion();
-                    oCamion.Patente = row["PATENTE"].ToString();
-                    oCamion.Estado = row["ESTADO"].ToString();
-                    oCamion.PesoMaximo = Convert.ToInt32(row["PESO_MAXIMO"].ToString());
-                    oCamion.Marca = row["MARCA"].ToString();
-                    oCamion.Modelo = row["MODELO"].ToString();
-                    lst.Add(oCamion);
-                }
-
-                cnn.Close();
+                tabla.Load(cmd.ExecuteReader());
             }
-            catch (SqlException)
+            catch (Exception ex)
             {
-                lst = null;
+                throw ex;
             }
-            return lst;
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return tabla;
+
+        }
+
+        public bool DeleteById(string storeName, string patente)
+        {
+            
+            SqlConnection cnn = new SqlConnection();
+            cnn.ConnectionString = cadenaConexion;
+            bool rta = true;
+            try
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(storeName, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@patente", patente);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                rta = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return rta;
         }
     }
 }

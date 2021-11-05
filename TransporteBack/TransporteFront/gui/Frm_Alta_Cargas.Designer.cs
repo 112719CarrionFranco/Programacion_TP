@@ -30,29 +30,29 @@ namespace TransporteFront.gui
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtTipoForm = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cboCamion = new System.Windows.Forms.ComboBox();
-            this.cboCarga = new System.Windows.Forms.ComboBox();
-            this.nudCarga = new System.Windows.Forms.NumericUpDown();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblCargaMinima = new System.Windows.Forms.Label();
+            this.lblCargaMaxima = new System.Windows.Forms.Label();
+            this.lblPesoParcial = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnLimpìar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.lblPesoParcial = new System.Windows.Forms.Label();
-            this.lblCargaMaxima = new System.Windows.Forms.Label();
-            this.lblCargaMinima = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipo_Carga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pesoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accion = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.nudCarga = new System.Windows.Forms.NumericUpDown();
+            this.cboCarga = new System.Windows.Forms.ComboBox();
+            this.cboCamion = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTipoForm = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -71,90 +71,38 @@ namespace TransporteFront.gui
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtTipoForm);
-            this.groupBox1.Location = new System.Drawing.Point(3, 0);
+            this.groupBox1.Location = new System.Drawing.Point(3, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(576, 367);
+            this.groupBox1.Size = new System.Drawing.Size(576, 355);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // txtTipoForm
+            // lblCargaMinima
             // 
-            this.txtTipoForm.AutoSize = true;
-            this.txtTipoForm.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtTipoForm.Location = new System.Drawing.Point(6, 19);
-            this.txtTipoForm.Name = "txtTipoForm";
-            this.txtTipoForm.Size = new System.Drawing.Size(151, 23);
-            this.txtTipoForm.TabIndex = 1;
-            this.txtTipoForm.Text = "Datos de la Carga:";
+            this.lblCargaMinima.AutoSize = true;
+            this.lblCargaMinima.Location = new System.Drawing.Point(392, 87);
+            this.lblCargaMinima.Name = "lblCargaMinima";
+            this.lblCargaMinima.Size = new System.Drawing.Size(85, 15);
+            this.lblCargaMinima.TabIndex = 14;
+            this.lblCargaMinima.Text = "Carga Minima:";
             // 
-            // label1
+            // lblCargaMaxima
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(81, 75);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Camion asignado";
+            this.lblCargaMaxima.AutoSize = true;
+            this.lblCargaMaxima.Location = new System.Drawing.Point(392, 72);
+            this.lblCargaMaxima.Name = "lblCargaMaxima";
+            this.lblCargaMaxima.Size = new System.Drawing.Size(87, 15);
+            this.lblCargaMaxima.TabIndex = 13;
+            this.lblCargaMaxima.Text = "Carga Maxima:";
             // 
-            // label2
+            // lblPesoParcial
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 119);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Carga";
-            // 
-            // cboCamion
-            // 
-            this.cboCamion.FormattingEnabled = true;
-            this.cboCamion.Location = new System.Drawing.Point(187, 72);
-            this.cboCamion.Name = "cboCamion";
-            this.cboCamion.Size = new System.Drawing.Size(181, 23);
-            this.cboCamion.TabIndex = 4;
-            // 
-            // cboCarga
-            // 
-            this.cboCarga.FormattingEnabled = true;
-            this.cboCarga.Location = new System.Drawing.Point(56, 119);
-            this.cboCarga.Name = "cboCarga";
-            this.cboCarga.Size = new System.Drawing.Size(220, 23);
-            this.cboCarga.TabIndex = 5;
-            // 
-            // nudCarga
-            // 
-            this.nudCarga.Location = new System.Drawing.Point(282, 119);
-            this.nudCarga.Name = "nudCarga";
-            this.nudCarga.Size = new System.Drawing.Size(120, 23);
-            this.nudCarga.TabIndex = 6;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAgregar.Location = new System.Drawing.Point(408, 119);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(115, 23);
-            this.btnAgregar.TabIndex = 7;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.detalle,
-            this.tipo_Carga,
-            this.peso,
-            this.cantidad,
-            this.pesoTotal,
-            this.accion});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 148);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 173);
-            this.dataGridView1.TabIndex = 8;
+            this.lblPesoParcial.AutoSize = true;
+            this.lblPesoParcial.Location = new System.Drawing.Point(392, 327);
+            this.lblPesoParcial.Name = "lblPesoParcial";
+            this.lblPesoParcial.Size = new System.Drawing.Size(73, 15);
+            this.lblPesoParcial.TabIndex = 12;
+            this.lblPesoParcial.Text = "Peso Parcial:";
             // 
             // btnSalir
             // 
@@ -165,6 +113,7 @@ namespace TransporteFront.gui
             this.btnSalir.TabIndex = 9;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnLimpìar
             // 
@@ -186,32 +135,21 @@ namespace TransporteFront.gui
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // lblPesoParcial
+            // dataGridView1
             // 
-            this.lblPesoParcial.AutoSize = true;
-            this.lblPesoParcial.Location = new System.Drawing.Point(392, 327);
-            this.lblPesoParcial.Name = "lblPesoParcial";
-            this.lblPesoParcial.Size = new System.Drawing.Size(73, 15);
-            this.lblPesoParcial.TabIndex = 12;
-            this.lblPesoParcial.Text = "Peso Parcial:";
-            // 
-            // lblCargaMaxima
-            // 
-            this.lblCargaMaxima.AutoSize = true;
-            this.lblCargaMaxima.Location = new System.Drawing.Point(392, 72);
-            this.lblCargaMaxima.Name = "lblCargaMaxima";
-            this.lblCargaMaxima.Size = new System.Drawing.Size(87, 15);
-            this.lblCargaMaxima.TabIndex = 13;
-            this.lblCargaMaxima.Text = "Carga Maxima:";
-            // 
-            // lblCargaMinima
-            // 
-            this.lblCargaMinima.AutoSize = true;
-            this.lblCargaMinima.Location = new System.Drawing.Point(392, 87);
-            this.lblCargaMinima.Name = "lblCargaMinima";
-            this.lblCargaMinima.Size = new System.Drawing.Size(85, 15);
-            this.lblCargaMinima.TabIndex = 14;
-            this.lblCargaMinima.Text = "Carga Minima:";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.detalle,
+            this.tipo_Carga,
+            this.peso,
+            this.cantidad,
+            this.pesoTotal,
+            this.accion});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 148);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(554, 173);
+            this.dataGridView1.TabIndex = 8;
             // 
             // detalle
             // 
@@ -244,6 +182,69 @@ namespace TransporteFront.gui
             this.accion.HeaderText = "Quitar";
             this.accion.Name = "accion";
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAgregar.Location = new System.Drawing.Point(408, 119);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(115, 23);
+            this.btnAgregar.TabIndex = 7;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            // 
+            // nudCarga
+            // 
+            this.nudCarga.Location = new System.Drawing.Point(282, 119);
+            this.nudCarga.Name = "nudCarga";
+            this.nudCarga.Size = new System.Drawing.Size(120, 23);
+            this.nudCarga.TabIndex = 6;
+            // 
+            // cboCarga
+            // 
+            this.cboCarga.FormattingEnabled = true;
+            this.cboCarga.Location = new System.Drawing.Point(56, 119);
+            this.cboCarga.Name = "cboCarga";
+            this.cboCarga.Size = new System.Drawing.Size(220, 23);
+            this.cboCarga.TabIndex = 5;
+            // 
+            // cboCamion
+            // 
+            this.cboCamion.FormattingEnabled = true;
+            this.cboCamion.Location = new System.Drawing.Point(187, 72);
+            this.cboCamion.Name = "cboCamion";
+            this.cboCamion.Size = new System.Drawing.Size(181, 23);
+            this.cboCamion.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(12, 119);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Carga";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(81, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Camion asignado";
+            // 
+            // txtTipoForm
+            // 
+            this.txtTipoForm.AutoSize = true;
+            this.txtTipoForm.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtTipoForm.Location = new System.Drawing.Point(6, 19);
+            this.txtTipoForm.Name = "txtTipoForm";
+            this.txtTipoForm.Size = new System.Drawing.Size(151, 23);
+            this.txtTipoForm.TabIndex = 1;
+            this.txtTipoForm.Text = "Datos de la Carga:";
+            // 
             // Frm_Alta_Cargas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -252,10 +253,11 @@ namespace TransporteFront.gui
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Alta_Cargas";
             this.Text = "Alta Cargas";
+            this.Load += new System.EventHandler(this.Frm_Alta_Cargas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).EndInit();
             this.ResumeLayout(false);
 
         }

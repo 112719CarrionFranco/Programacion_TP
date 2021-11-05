@@ -11,47 +11,57 @@ namespace TransporteFront.cliente
     {
         private static ClienteSingleton instancia;
         private HttpClient client;
+
         private ClienteSingleton()
         {
             client = new HttpClient();
         }
 
-        public static ClienteSingleton GetInstancia()
+        public static ClienteSingleton GetInstance()
         {
             if (instancia == null)
+            {
                 instancia = new ClienteSingleton();
+            }
             return instancia;
         }
-
-
+        //---------------------------------------------------------------------------------------------
+        //Métodos http
         public async Task<string> GetAsync(string url)
         {
             var result = await client.GetAsync(url);
             var content = "";
+
             if (result.IsSuccessStatusCode)
                 content = await result.Content.ReadAsStringAsync();
+
             return content;
         }
-
+        //---------------------------------------------------------------------------------------------
         public async Task<string> PostAsync(string url, string data)
         {
-            StringContent content = new StringContent(data, Encoding.UTF8,
-            "application/json");
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
             var result = await client.PostAsync(url, content);
             var response = "";
+
             if (result.IsSuccessStatusCode)
                 response = await result.Content.ReadAsStringAsync();
+
             return response;
         }
-
+        //---------------------------------------------------------------------------------------------
         public async Task<string> DeleteAsync(string url)
         {
             var result = await client.DeleteAsync(url);
             var content = "";
+
             if (result.IsSuccessStatusCode)
                 content = await result.Content.ReadAsStringAsync();
+
             return content;
         }
+
 
 
     }

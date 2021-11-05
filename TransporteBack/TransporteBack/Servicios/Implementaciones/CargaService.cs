@@ -74,7 +74,17 @@ namespace TransporteBack.Servicios.Implementaciones
 
         public List<Camion> ConsultarCamiones(List<Parametro> criterios)
         {
-            return dao.ConsultarCamiones(criterios);
+            return dao.GetByFilters(criterios);
+        }
+
+        public bool RegistrarBajaCamion(string patente)
+        {
+            return dao.SaveBajaCamion(patente);
+        }
+
+        public List<Camion> ConsultarCamionesSP(string sp)
+        {
+            return dao.GetByFiltersSP(sp);
         }
     }
 }

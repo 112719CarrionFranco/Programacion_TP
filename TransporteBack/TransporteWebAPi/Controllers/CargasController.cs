@@ -38,22 +38,21 @@ namespace TransporteWebAPi.Controllers
         }
 
         // POST api/<CargasController>
-        [HttpPost("consultar")]
-        public IActionResult GetCamiones(List<Parametro> lst)
+        [HttpPost("consultaparam")]
+        public IActionResult PostConsulta(List<Parametro> filtros)
         {
-            if (lst == null || lst.Count == 0)
+            if (filtros == null || filtros.Count == 0)
                 return BadRequest("Se requiere una lista de parámetros!");
 
-            return Ok(service.ConsultarCamiones(lst));
+            return Ok(service.ConsultarCamiones(filtros));
         }
 
-        // DELETE api/<CargasController>/5
-        [HttpDelete("Eliminar Carga")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{patente}")]
+        public IActionResult Delete(string patente)
         {
-            if (id == 0)
-                return BadRequest("Id es requerido!");
-            return Ok(service.RegistrarBajaCarga(id));
+            if (!String.IsNullOrEmpty(patente))
+                return BadRequest("se necesita la patente!");
+            return Ok(service.RegistrarBajaCamion(patente));
         }
     }
 }

@@ -32,4 +32,3 @@ D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consultar_Flota.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consulta_Cargas.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consulta_TCarga.resources
-D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.csproj.CopyComplete

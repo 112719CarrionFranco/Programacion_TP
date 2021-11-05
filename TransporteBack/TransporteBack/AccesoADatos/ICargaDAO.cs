@@ -9,7 +9,7 @@ using TrasnporteDeCargas.Dominio;
 
 namespace TransporteBack.AccesoADatos
 {
-    interface ICargaDAO
+    public interface ICargaDAO
     {
         public int ObtenerProximoNroCarga();
         public DataTable ListarProductos();
@@ -20,7 +20,10 @@ namespace TransporteBack.AccesoADatos
         public bool ActualizarCarga(Carga oCarga);
         public bool ControlUsuarios(string usuario, string pass);
         public bool GuardarCamion(Camion oCamion);
-        List<Camion> ConsultarCamiones(List<Parametro> criterios);
+        public List<Camion> GetByFilters(List<Parametro> criterios);
+        public bool SaveBajaCamion(string patente);
+        public List<Camion> GetByFiltersSP(string sp);
+
 
     }
 }
