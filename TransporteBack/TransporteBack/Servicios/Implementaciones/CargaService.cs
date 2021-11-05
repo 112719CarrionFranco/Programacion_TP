@@ -82,9 +82,9 @@ namespace TransporteBack.Servicios.Implementaciones
             return dao.SaveBajaCamion(patente);
         }
 
-        public List<Camion> ConsultarCamionesSP(string sp)
+        public List<Camion> ConsultarCamionesSP()
         {
-            return dao.GetByFiltersSP(sp);
+            return dao.GetByFiltersSP();
         }
     }
 }

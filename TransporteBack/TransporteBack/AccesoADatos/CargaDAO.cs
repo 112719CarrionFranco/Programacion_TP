@@ -75,12 +75,12 @@ namespace TransporteBack.AccesoADatos
             return listCam;
         }
 
-        public List<Camion> GetByFiltersSP(string sp)
+        public List<Camion> GetByFiltersSP()
         {
             List<Camion> lst = new List<Camion>();
             SqlConnection cnn = new SqlConnection(@"Data Source=PC\SQLEXPRESS;Initial Catalog=Transporte_Cargas;Integrated Security=True");
             cnn.Open();
-            SqlCommand cmd2 = new SqlCommand(sp, cnn);
+            SqlCommand cmd2 = new SqlCommand("SP_CONSULTAR_CAMIONES_SINP", cnn);
 
             cmd2.CommandType = CommandType.StoredProcedure;
 

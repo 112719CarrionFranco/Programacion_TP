@@ -25,7 +25,7 @@ namespace TransporteFront.gui
 
         private void CargarComboCamion()
         {
-            List<Camion> lst = servicio.ConsultarSinParametros();
+            List<Camion> lst = servicio.ConsultarCamionesSP();
 
             //source es una lista de objetos
             cboCamion.DataSource = lst;

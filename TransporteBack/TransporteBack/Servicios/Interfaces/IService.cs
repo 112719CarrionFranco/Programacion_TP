@@ -21,7 +21,7 @@ namespace TransporteBack.Servicios
         public bool ControlUsuarios(string usuario, string pass);
         public bool GuardarCamion(Camion oCamion);
         public bool RegistrarBajaCamion(string patente);
-        public List<Camion> ConsultarCamionesSP(string sp);
+        public List<Camion> ConsultarCamionesSP();
 
     }
 }
