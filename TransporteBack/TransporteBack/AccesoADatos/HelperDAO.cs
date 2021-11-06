@@ -63,6 +63,36 @@ namespace TransporteBack.AccesoADatos
 
         }
 
+        //public List<Camion> GetByFilterSP()
+        //{
+        //    List<Camion> lst = new List<Camion>();
+        //    SqlConnection cnn = new SqlConnection();
+        //    cnn.ConnectionString = cadenaConexion;
+
+
+        //    cnn.Open();
+        //    SqlCommand cmd2 = new SqlCommand("SP_CONSULTAR_CAMIONES_SINP", cnn);
+
+        //    cmd2.CommandType = CommandType.StoredProcedure;
+
+        //    DataTable table = new DataTable();
+        //    table.Load(cmd2.ExecuteReader());
+
+        //    cnn.Close();
+
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        Camion oCamion = new Camion();
+        //        oCamion.Patente = (row["PATENTE"].ToString());
+        //        oCamion.PesoMaximo = Convert.ToInt32(row["PESO_MAXIMO"].ToString());
+        //        oCamion.Marca = (row["MARCA"].ToString());
+        //        oCamion.Modelo = (row["MODELO"].ToString());
+        //        lst.Add(oCamion);
+        //    }
+
+        //    return lst;
+        //}
+
         public int ProximoID(string nombreSP, string nombreParametro)
         {
             SqlConnection cnn = new SqlConnection();
@@ -171,7 +201,7 @@ namespace TransporteBack.AccesoADatos
                 cmd.ExecuteNonQuery();
                 int IdCarga = Convert.ToInt32(param.Value);
                 int cDetalles = 1; // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
-                int filasAfectadas = 0;
+                
 
 
                 foreach (DetalleCargas det in oCarga.Detalles)
@@ -229,7 +259,7 @@ namespace TransporteBack.AccesoADatos
                 {
                     //solo para el primer resultado recuperamos los datos del MAESTRO:
                     oCarga.IdCarga = Convert.ToInt32(reader["carga_nro"].ToString());
-                    oCarga.PesoTotal = Convert.ToDouble(reader["peso"].ToString());
+                    oCarga.PesoTotal = Convert.ToInt32(reader["peso"].ToString());
                     oCarga.Fecha = Convert.ToDateTime(reader["fecha"].ToString());
                     oCarga.Patente = (reader["patente"].ToString());
                     esPrimerRegistro = false;
@@ -239,7 +269,7 @@ namespace TransporteBack.AccesoADatos
                 TipoCarga oTipoCarga = new TipoCarga();
                 oTipoCarga.IdTipoCarga = Convert.ToInt32(reader["id_tipoCarga"].ToString());
                 oTipoCarga.Nombre = reader["nombreTC"].ToString();
-                oTipoCarga.Peso = Convert.ToDouble(reader["peso"].ToString());
+                oTipoCarga.Peso = Convert.ToInt32(reader["peso"].ToString());
                 oDetalle.TipoCarga = oTipoCarga;
                 oDetalle.Cantidad = Convert.ToInt32(reader["cantidad"].ToString());
                 esPrimerRegistro = false;
@@ -310,7 +340,7 @@ namespace TransporteBack.AccesoADatos
                     Carga oCarga = new Carga();
                     oCarga.Patente = row["PATENTE"].ToString();
                     oCarga.Fecha = Convert.ToDateTime(row["FECHA"].ToString());
-                    oCarga.PesoTotal = Convert.ToDouble(row["TOTAL_KG"].ToString());
+                    oCarga.PesoTotal = Convert.ToInt32(row["TOTAL_KG"].ToString());
                     oCarga.IdCarga = Convert.ToInt32(row["ID_CARGA"].ToString());
                     lst.Add(oCarga);
                 }

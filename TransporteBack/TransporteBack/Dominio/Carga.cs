@@ -10,7 +10,7 @@ namespace TrasnporteDeCargas.Dominio
     {
         public int IdCarga { get; set; }
         public DateTime Fecha { get; set; }
-        public double PesoTotal { get; set; }
+        public int PesoTotal { get; set; }
         public string Patente { get; set; }
 
         public List<DetalleCargas> Detalles { get; }
@@ -34,7 +34,17 @@ namespace TrasnporteDeCargas.Dominio
         }
 
 
+        public int CalcularTotal()
+        {
+            int total = 0;
 
+            foreach (DetalleCargas item in Detalles)
+            {
+                total += item.CalcularPesoTotal();
+            }
+
+            return total;
+        }
 
 
 

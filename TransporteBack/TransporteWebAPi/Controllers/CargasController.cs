@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TransporteBack.Servicios;
+using TrasnporteDeCargas.Dominio;
 
 namespace TransporteWebAPi.Controllers
 {
@@ -17,6 +18,18 @@ namespace TransporteWebAPi.Controllers
         public CargasController()
         {
             service = new ServiceFactoryImp().CrearService();
+        }
+
+        [HttpPost("registro")]
+        public IActionResult PostCliente(Carga oCarga)
+        {
+            if (oCarga != null)
+            {
+                bool result = service.Crear(oCarga);
+                return Ok(result);
+            }
+
+            return BadRequest("Se requiere la patente del camion");
         }
 
         // GET api/<CargasController>/5

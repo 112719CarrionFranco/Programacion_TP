@@ -75,29 +75,9 @@ namespace TransporteBack.AccesoADatos
             return listCam;
         }
 
-        public List<Camion> GetByFiltersSP()
+        public DataTable GetByFilterSP(string sp)
         {
-            List<Camion> lst = new List<Camion>();
-            SqlConnection cnn = new SqlConnection(@"Data Source=PC\SQLEXPRESS;Initial Catalog=Transporte_Cargas;Integrated Security=True");
-            cnn.Open();
-            SqlCommand cmd2 = new SqlCommand("SP_CONSULTAR_CAMIONES_SINP", cnn);
-
-            cmd2.CommandType = CommandType.StoredProcedure;
-
-            DataTable table = new DataTable();
-            table.Load(cmd2.ExecuteReader());
-
-            cnn.Close();
-
-            foreach (DataRow row in table.Rows)
-            {
-                Camion oCamion = new Camion();
-                oCamion.Patente = (row["PATENTE"].ToString());
-                oCamion.PesoMaximo = Convert.ToInt32(row["PESO_MAXIMO"].ToString());
-                lst.Add(oCamion);
-            }
-
-            return lst;
+            return HelperDAO.ObtenerInstancia().ConsultaSQL(sp);
         }
 
 

@@ -19,7 +19,7 @@ namespace TransporteBack.Dominio
             Cantidad = 0;
         }
 
-        public double CalcularPesoTotal()
+        public int CalcularPesoTotal()
         {
             return TipoCarga.Peso * Cantidad;
         }

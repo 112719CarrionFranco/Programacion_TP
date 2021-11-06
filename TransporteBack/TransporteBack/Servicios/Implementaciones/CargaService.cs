@@ -30,7 +30,7 @@ namespace TransporteBack.Servicios.Implementaciones
 
         public bool Crear(Carga oCarga)
         {
-            return Crear(oCarga);
+            return dao.Crear(oCarga);
         }
 
         public DataTable ListarProductos()
@@ -82,9 +82,9 @@ namespace TransporteBack.Servicios.Implementaciones
             return dao.SaveBajaCamion(patente);
         }
 
-        public List<Camion> ConsultarCamionesSP()
+        public DataTable ConsultarSP(string sp)
         {
-            return dao.GetByFiltersSP();
+            return dao.GetByFilterSP(sp);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TrasnporteDeCargas.Dominio
 
         public int IdTipoCarga { get; set; }
         public string Nombre { get; set; }
-        public double Peso { get; set; }
+        public int Peso { get; set; }
 
         public TipoCarga()
         {

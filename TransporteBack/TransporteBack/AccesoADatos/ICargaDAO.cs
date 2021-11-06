@@ -22,7 +22,7 @@ namespace TransporteBack.AccesoADatos
         public bool GuardarCamion(Camion oCamion);
         public List<Camion> GetByFilters(List<Parametro> criterios);
         public bool SaveBajaCamion(string patente);
-        public List<Camion> GetByFiltersSP();
+        public DataTable GetByFilterSP(string sp);
 
 
     }

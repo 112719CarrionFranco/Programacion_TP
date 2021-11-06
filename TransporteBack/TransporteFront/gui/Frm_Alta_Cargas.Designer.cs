@@ -32,11 +32,11 @@ namespace TransporteFront.gui
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCargaMinima = new System.Windows.Forms.Label();
             this.lblCargaMaxima = new System.Windows.Forms.Label();
-            this.lblPesoParcial = new System.Windows.Forms.Label();
+            this.lblPesoTotal = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnLimpìar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDetalles = new System.Windows.Forms.DataGridView();
             this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipo_Carga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +51,7 @@ namespace TransporteFront.gui
             this.label1 = new System.Windows.Forms.Label();
             this.txtTipoForm = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,11 +59,11 @@ namespace TransporteFront.gui
             // 
             this.groupBox1.Controls.Add(this.lblCargaMinima);
             this.groupBox1.Controls.Add(this.lblCargaMaxima);
-            this.groupBox1.Controls.Add(this.lblPesoParcial);
+            this.groupBox1.Controls.Add(this.lblPesoTotal);
             this.groupBox1.Controls.Add(this.btnSalir);
             this.groupBox1.Controls.Add(this.btnLimpìar);
             this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dgvDetalles);
             this.groupBox1.Controls.Add(this.btnAgregar);
             this.groupBox1.Controls.Add(this.nudCarga);
             this.groupBox1.Controls.Add(this.cboCarga);
@@ -95,14 +95,14 @@ namespace TransporteFront.gui
             this.lblCargaMaxima.TabIndex = 13;
             this.lblCargaMaxima.Text = "Carga Maxima:";
             // 
-            // lblPesoParcial
+            // lblPesoTotal
             // 
-            this.lblPesoParcial.AutoSize = true;
-            this.lblPesoParcial.Location = new System.Drawing.Point(392, 327);
-            this.lblPesoParcial.Name = "lblPesoParcial";
-            this.lblPesoParcial.Size = new System.Drawing.Size(73, 15);
-            this.lblPesoParcial.TabIndex = 12;
-            this.lblPesoParcial.Text = "Peso Parcial:";
+            this.lblPesoTotal.AutoSize = true;
+            this.lblPesoTotal.Location = new System.Drawing.Point(392, 327);
+            this.lblPesoTotal.Name = "lblPesoTotal";
+            this.lblPesoTotal.Size = new System.Drawing.Size(63, 15);
+            this.lblPesoTotal.TabIndex = 12;
+            this.lblPesoTotal.Text = "Peso Total:";
             // 
             // btnSalir
             // 
@@ -134,22 +134,23 @@ namespace TransporteFront.gui
             this.btnGuardar.TabIndex = 11;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // dataGridView1
+            // dgvDetalles
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.detalle,
             this.tipo_Carga,
             this.peso,
             this.cantidad,
             this.pesoTotal,
             this.accion});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 148);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 173);
-            this.dataGridView1.TabIndex = 8;
+            this.dgvDetalles.Location = new System.Drawing.Point(12, 148);
+            this.dgvDetalles.Name = "dgvDetalles";
+            this.dgvDetalles.RowTemplate.Height = 25;
+            this.dgvDetalles.Size = new System.Drawing.Size(554, 173);
+            this.dgvDetalles.TabIndex = 8;
             // 
             // detalle
             // 
@@ -191,6 +192,7 @@ namespace TransporteFront.gui
             this.btnAgregar.TabIndex = 7;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // nudCarga
             // 
@@ -256,7 +258,7 @@ namespace TransporteFront.gui
             this.Load += new System.EventHandler(this.Frm_Alta_Cargas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).EndInit();
             this.ResumeLayout(false);
 
@@ -265,7 +267,7 @@ namespace TransporteFront.gui
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDetalles;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.NumericUpDown nudCarga;
         private System.Windows.Forms.ComboBox cboCarga;
@@ -278,7 +280,7 @@ namespace TransporteFront.gui
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label lblCargaMinima;
         private System.Windows.Forms.Label lblCargaMaxima;
-        private System.Windows.Forms.Label lblPesoParcial;
+        private System.Windows.Forms.Label lblPesoTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn detalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipo_Carga;
         private System.Windows.Forms.DataGridViewTextBoxColumn peso;
