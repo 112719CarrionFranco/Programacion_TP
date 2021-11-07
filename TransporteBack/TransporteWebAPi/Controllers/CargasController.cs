@@ -52,6 +52,14 @@ namespace TransporteWebAPi.Controllers
             return Ok(service.ObtenerCargaPorID(nro));
         }
 
+        [HttpGet("{patente}")]
+        public IActionResult CargaMaxima(string patente)
+        {
+            if (string.IsNullOrEmpty(patente))
+                return BadRequest("Se requiere patente");
+            return Ok(service.ConsultaPesoMax(patente));
+        }
+
         // GET api/<CargasController>/5
         [HttpPost("Login")]
         public IActionResult Login(string usuario, string contraseña)

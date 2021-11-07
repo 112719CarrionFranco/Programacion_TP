@@ -102,5 +102,10 @@ namespace TransporteBack.AccesoADatos
         {
             return HelperDAO.ObtenerInstancia().DeleteById("SP_ELIMINAR_CAMION", patente);
         }
+
+        public int GetPesoMax(string patente)
+        {
+            return HelperDAO.ObtenerInstancia().GetPesoMax("SP_CARGA_MAX", patente);
+        }
     }
 }

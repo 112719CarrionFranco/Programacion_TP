@@ -83,5 +83,10 @@ namespace TransporteBack.Servicios.Implementaciones
         {
             return dao.GetByFilterSP(sp);
         }
+
+        public int ConsultaPesoMax(string patente)
+        {
+            return dao.GetPesoMax(patente);
+        }
     }
 }

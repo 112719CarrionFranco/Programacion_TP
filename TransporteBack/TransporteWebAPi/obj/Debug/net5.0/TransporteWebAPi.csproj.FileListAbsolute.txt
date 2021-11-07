@@ -34,4 +34,3 @@ D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteWebAPi\obj\Debug\net5.0\TransporteWebAPi.pdb
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteWebAPi\obj\Debug\net5.0\TransporteWebAPi.genruntimeconfig.cache
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteWebAPi\obj\Debug\net5.0\TransporteWebAPi.MvcApplicationPartsAssemblyInfo.cs
-D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteWebAPi\obj\Debug\net5.0\TransporteWebAPi.csproj.CopyComplete

@@ -25,6 +25,7 @@ namespace TransporteFront.gui
     public partial class Frm_Alta_Cargas : Form
     {
         Carga oCarga = new Carga();
+        Camion oCamion = new Camion();
         private Accion modo;
         private int nro;
         //El service hay que sacarlo para poner la consulta que llena los combos en la api
@@ -41,13 +42,13 @@ namespace TransporteFront.gui
         private void CargarComboCamion()
         {
             DataTable tabla = servicio.ConsultarSP("SP_CONSULTAR_CAMIONES_SINP");
-
             //source es una lista de objetos
             cboCamion.DataSource = tabla;
             cboCamion.ValueMember = tabla.Columns[0].ColumnName; //patente
             cboCamion.DisplayMember = tabla.Columns[0].ColumnName; //patente
             //Revisar cbo para que meustre la carga maxima y desp hacer la validacion para que no deje salir sin el 75% o pasado de peso
-            //lblCargaMaxima.Text = "Carga Maxima: " + tabla.Columns[2]();
+
+            lblCargaMaxima.Text = "Carga maxima" + servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString());
 
         }
 
@@ -137,11 +138,11 @@ namespace TransporteFront.gui
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //if (ExisteProductoEnGrilla(cboCarga.Text))
-            //{
-            //    MessageBox.Show("Producto ya agregado como detalle", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            if (ExisteProductoEnGrilla(cboCarga.Text))
+            {
+                MessageBox.Show("Producto ya agregado como detalle", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
 
             DialogResult result = MessageBox.Show("Desea Agregar?", "Confirmación", MessageBoxButtons.YesNo);
@@ -190,48 +191,51 @@ namespace TransporteFront.gui
 
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
-            
 
-            if (modo.Equals(Accion.NUEVO))
+
+            if (CargaMaximaYMinima(cboCamion.Text))
             {
-                if (ValidarCampos())
+                if (modo.Equals(Accion.NUEVO))
                 {
-                    oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
-                    oCarga.Patente = (cboCamion.Text);
-                    var saveOK = await RegistrarCargaAsync(oCarga);
-
-
-                    if (saveOK)
+                    if (ValidarCampos())
                     {
-                        MessageBox.Show("Carga registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
+                        oCarga.Patente = (cboCamion.Text);
+                        var saveOK = await RegistrarCargaAsync(oCarga);
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR. No se pudo registrar la carga", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        if (saveOK)
+                        {
+                            MessageBox.Show("Carga registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR. No se pudo registrar la carga", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-            }
-            if (modo.Equals(Accion.EDITAR))
-            {
-                if (ValidarCampos())
+                if (modo.Equals(Accion.EDITAR))
                 {
-                    oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
-                    oCarga.Patente = (cboCamion.Text);
-
-                    var updateOK = await ActualizarCargaAsync(oCarga);
-
-                    if (updateOK)
+                    if (ValidarCampos())
                     {
-                        MessageBox.Show("El Cliente se ha Actualizado con éxito",
-                            "MENSAJE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LimpiarCampos();
-                        this.Dispose();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El Cliente no pudo Actualizarse, consulte al Administrador",
-                            "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
+                        oCarga.Patente = (cboCamion.Text);
+
+                        var updateOK = await ActualizarCargaAsync(oCarga);
+
+                        if (updateOK)
+                        {
+                            MessageBox.Show("El Cliente se ha Actualizado con éxito",
+                                "MENSAJE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LimpiarCampos();
+                            this.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show("El Cliente no pudo Actualizarse, consulte al Administrador",
+                                "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -272,7 +276,7 @@ namespace TransporteFront.gui
         {
             dgvDetalles.Rows.Clear();
             nudCarga.Value = 0;
-            cboCamion.SelectedIndex = -1;
+            cboCamion.SelectedIndex = 0;
         }
 
         private bool ValidarCampos()
@@ -291,33 +295,50 @@ namespace TransporteFront.gui
                 dgvDetalles.Focus();
                 return false;
             }
-            //if (calcularPesosTotales() < (o))
-            //{
-            //    MessageBox.Show("Debe ingresar un Apellido de Cliente",
-            //        "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    txtApellido.Focus();
-            //    return false;
-            //}
             
 
             return true;
         }
 
-        private void CargaMaxima()
+        private async Task<int> CargaMaximaASYNC(string patente)
         {
-            DataTable tabla = servicio.ConsultarSP("SP_CONSULTAR_CAMIONES_SINP");
-
-            //source es una lista de objetos
+            string url = "https://localhost:44311/api/Cargas/" + patente.ToString();
+            var resultado = await ClienteSingleton.GetInstance().GetAsync(url);
+            int pesoMax = JsonConvert.DeserializeObject<int>(resultado);
             
+            return pesoMax;
 
-            //Revisar cbo para que meustre la carga maxima y desp hacer la validacion para que no deje salir sin el 75% o pasado de peso
-            //lblCargaMaxima.Text = "Carga Maxima: " + tabla.Columns[2]();
-
+            
         }
 
         private void cboCamion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            lblCargaMaxima.Text = "Carga maxima" + servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString());
+        }
+
+        private bool CargaMaximaYMinima(string patente)
+        {
+            bool estado = true;
+            int cargaMax = servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString());
+            int pesoTotal = calcularPesosTotales();
+            int pesoMin = (cargaMax * 25) / 100;
+
+            if(pesoTotal > cargaMax)
+            {
+                MessageBox.Show("El peso de la carga Sobrepasa la capacidad del camion",
+                    "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgvDetalles.Focus();
+                estado = false;
+            }
+            if(pesoMin > pesoTotal)
+            {
+                MessageBox.Show("El peso de la carga es inferior al 75%.\n EL camion debe llevar mas carga",
+                    "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgvDetalles.Focus();
+                estado = false;
+            }
+            return estado;
+
         }
     }
 }

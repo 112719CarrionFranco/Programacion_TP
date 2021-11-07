@@ -44,17 +44,17 @@ CONTRASEÑA VARCHAR(50)
 CONSTRAINT PK_USUARIOS PRIMARY KEY(ID_USUARIO))
 
 set dateformat dmy
-CREATE PROCEDURE [dbo].SP_CONSULTAR_CARGAS
+ALTER PROCEDURE [dbo].SP_CONSULTAR_CARGAS
 	@fecha_desde Date,
 	@fecha_hasta Date,
-	@patente varchar(7),
-	@peso varchar(1)
+	@patente varchar(7)
 AS
+
 BEGIN
 	SELECT * FROM CARGAS
 	WHERE 
-	 ((@fecha_desde is null and @fecha_hasta is  null) OR (fecha between @fecha_desde and @fecha_hasta))
-	 AND(@patente is null OR (@patente like '%' + @patente + '%'))
+	 ( FECHA BETWEEN @fecha_desde AND @fecha_hasta )
+			OR PATENTE LIKE '%' + @patente + '%'
 	 
 END
 --
@@ -104,7 +104,7 @@ BEGIN
 	SET @next = (SELECT MAX(ID_CARGA)+1  FROM CARGAS);
 END
 --
-ALTER procedure [dbo].[SP_ELIMINAR_CARGA]
+ALTER procedure [dbo].[SP_ELIMINAR_CARGA] 26
 @id_Carga int
 AS
 	BEGIN
@@ -112,7 +112,7 @@ AS
 	END
 
 
-ALTER procedure [dbo].[SP_ELIMINAR_DETALLE_CARGA]
+ALTER procedure [dbo].[SP_ELIMINAR_DETALLE_CARGA] 26
 @id_Carga int
 AS
 	BEGIN
@@ -120,15 +120,15 @@ AS
 	END
 
 
-alter PROCEDURE SP_CONSULTAR_CARGA_POR_ID
+ALTER PROCEDURE [dbo].[SP_CONSULTAR_CARGA_POR_ID] 24
 @carga_nro INT
 AS	
 	BEGIN
 		SELECT
-			@carga_nro AS 'carga_nro',
+			C.ID_CARGA AS 'carga_nro',
 			TC.NOMBRE as 'nombreTC',
 			TC.ID_TIPO_CARGA as 'id_tipoCarga',
-			C.TOTAL_KG as 'peso',
+			TC.PESO AS 'peso',
 			c.FECHA as 'fecha',
 			DC.CANTIDAD as 'cantidad',
 			C.PATENTE AS 'patente'
@@ -139,10 +139,11 @@ AS
 		WHERE DC.ID_CARGA = @carga_nro
 	END
 
-CREATE PROCEDURE SP_UPDATE_CARGAS
+alter PROCEDURE SP_UPDATE_CARGAS
 @id_carga INT,
 @patente varchar(7),
-@total_kg decimal(4,2)
+@total_kg int,
+@next int output
 AS
 	BEGIN
 		UPDATE CARGAS
@@ -150,7 +151,23 @@ AS
 			PATENTE = @patente,
 			TOTAL_KG = @total_kg
 		WHERE ID_CARGA = @id_carga
+		SET @next = (SELECT MAX(DETALLE_NRO)+1  FROM DETALLE_CARGAS);
 	END
+
+CREATE PROCEDURE SP_CARGA_MAX 'fgh456', @peso_max = int
+@patente varchar(7),
+@peso_max int output
+	as
+		begin
+			SET @peso_max = (SELECT PESO_MAXIMO FROM CAMIONES WHERE @patente = PATENTE)
+END
+
+declare @peso_max int
+exec SP_CARGA_MAX 'fgh456', @peso_max output
+
+select @peso_max
+
+
 
 
 ALTER PROCEDURE SP_CONTROL_USUARIO 

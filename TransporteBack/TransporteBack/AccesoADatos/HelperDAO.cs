@@ -134,6 +134,44 @@ namespace TransporteBack.AccesoADatos
             }
         }
 
+        public int GetPesoMax(string nombreSP, string patente)
+        {
+            SqlConnection cnn = new SqlConnection();
+            bool resultado = true;
+            int PesoMax = 0;
+
+            try
+            {
+                cnn.ConnectionString = cadenaConexion;
+                cnn.Open();
+
+                SqlCommand cmd = new SqlCommand(nombreSP, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@patente", patente);
+
+                SqlParameter param = new SqlParameter("@peso_max", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(param);
+
+                cmd.ExecuteNonQuery();
+                PesoMax = Convert.ToInt32(param.Value);
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+
+
+            return PesoMax;
+        }
+
         public int EjecutarSQL(string nombreSP, Dictionary<string, object> parametros)
         {
             SqlConnection cnn = new SqlConnection();
@@ -228,11 +266,11 @@ namespace TransporteBack.AccesoADatos
 
                 trans.Commit();
             }
-            //catch (Exception ex)
-            //{
-            //    trans.Rollback();
-            //    resultado = false;
-            //}
+            catch (Exception ex)
+            {
+                trans.Rollback();
+                resultado = false;
+            }
             finally
             {
                 if (cnn != null && cnn.State == ConnectionState.Open)
@@ -490,7 +528,6 @@ namespace TransporteBack.AccesoADatos
 
         public DataTable ConsultaTablaParam(string storeName, List<Parametro> criterios)
         {
-            List<Camion> lst = new List<Camion>();
             DataTable tabla = new DataTable();
             SqlConnection cnn = new SqlConnection();
             cnn.ConnectionString = cadenaConexion;
@@ -550,5 +587,7 @@ namespace TransporteBack.AccesoADatos
             }
             return rta;
         }
+
+
     }
 }
