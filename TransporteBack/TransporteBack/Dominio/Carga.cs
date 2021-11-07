@@ -13,16 +13,13 @@ namespace TrasnporteDeCargas.Dominio
         public int PesoTotal { get; set; }
         public string Patente { get; set; }
 
-        public List<DetalleCargas> Detalles { get; }
+        public List<DetalleCargas> Detalles { get; set; }
 
         public Carga()
         {
-            // Generar la relacion 1 a muchos
             Detalles = new List<DetalleCargas>();
         }
 
-        // Funcion para agregar los detalles del mismo presupuesto a una lista
-        // pq un presupuesto tiene muchos detalles
         public void AgregarDetalle(DetalleCargas detalle)
         {
             Detalles.Add(detalle);

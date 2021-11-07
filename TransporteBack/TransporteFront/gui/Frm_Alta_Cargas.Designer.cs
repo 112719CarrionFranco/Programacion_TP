@@ -37,7 +37,7 @@ namespace TransporteFront.gui
             this.btnLimpìar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.dgvDetalles = new System.Windows.Forms.DataGridView();
-            this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idTipoCarga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipo_Carga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,6 +124,7 @@ namespace TransporteFront.gui
             this.btnLimpìar.TabIndex = 10;
             this.btnLimpìar.Text = "Limpiar";
             this.btnLimpìar.UseVisualStyleBackColor = true;
+            this.btnLimpìar.Click += new System.EventHandler(this.btnLimpìar_Click);
             // 
             // btnGuardar
             // 
@@ -138,9 +139,11 @@ namespace TransporteFront.gui
             // 
             // dgvDetalles
             // 
+            this.dgvDetalles.AllowUserToAddRows = false;
+            this.dgvDetalles.AllowUserToDeleteRows = false;
             this.dgvDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.detalle,
+            this.idTipoCarga,
             this.tipo_Carga,
             this.peso,
             this.cantidad,
@@ -149,14 +152,15 @@ namespace TransporteFront.gui
             this.dgvDetalles.Location = new System.Drawing.Point(12, 148);
             this.dgvDetalles.Name = "dgvDetalles";
             this.dgvDetalles.RowTemplate.Height = 25;
-            this.dgvDetalles.Size = new System.Drawing.Size(554, 173);
+            this.dgvDetalles.Size = new System.Drawing.Size(546, 173);
             this.dgvDetalles.TabIndex = 8;
+            this.dgvDetalles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalles_CellContentClick);
             // 
-            // detalle
+            // idTipoCarga
             // 
-            this.detalle.HeaderText = "Column1";
-            this.detalle.Name = "detalle";
-            this.detalle.Visible = false;
+            this.idTipoCarga.HeaderText = "Column1";
+            this.idTipoCarga.Name = "idTipoCarga";
+            this.idTipoCarga.Visible = false;
             // 
             // tipo_Carga
             // 
@@ -182,6 +186,9 @@ namespace TransporteFront.gui
             // 
             this.accion.HeaderText = "Quitar";
             this.accion.Name = "accion";
+            this.accion.Text = "Quitar";
+            this.accion.ToolTipText = "Quitar";
+            this.accion.UseColumnTextForButtonValue = true;
             // 
             // btnAgregar
             // 
@@ -281,7 +288,8 @@ namespace TransporteFront.gui
         private System.Windows.Forms.Label lblCargaMinima;
         private System.Windows.Forms.Label lblCargaMaxima;
         private System.Windows.Forms.Label lblPesoTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn detalle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_tipo_carga;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idTipoCarga;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipo_Carga;
         private System.Windows.Forms.DataGridViewTextBoxColumn peso;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;

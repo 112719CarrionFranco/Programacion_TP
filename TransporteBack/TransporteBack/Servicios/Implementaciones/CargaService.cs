@@ -63,10 +63,7 @@ namespace TransporteBack.Servicios.Implementaciones
             throw new NotImplementedException();
         }
 
-        public List<Carga> ConsultarCargas(List<Parametro> criterios)
-        {
-            throw new NotImplementedException();
-        }
+        
         public bool GuardarCamion(Camion oCamion)
         {
             return dao.GuardarCamion(oCamion);

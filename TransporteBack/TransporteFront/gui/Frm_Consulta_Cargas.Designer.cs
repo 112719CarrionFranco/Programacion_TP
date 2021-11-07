@@ -30,26 +30,24 @@ namespace TransporteFront.gui
         private void InitializeComponent()
         {
             this.gbResultados = new System.Windows.Forms.GroupBox();
+            this.btnConsultar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.dgvCargasResult = new System.Windows.Forms.DataGridView();
+            this.dgvResultados = new System.Windows.Forms.DataGridView();
+            this.idCarga = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pesoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
-            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtPeso = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.idCarga = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pesoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnConsultar = new System.Windows.Forms.Button();
             this.gbResultados.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCargasResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,14 +56,24 @@ namespace TransporteFront.gui
             this.gbResultados.Controls.Add(this.btnConsultar);
             this.gbResultados.Controls.Add(this.btnEditar);
             this.gbResultados.Controls.Add(this.btnEliminar);
-            this.gbResultados.Controls.Add(this.dgvCargasResult);
+            this.gbResultados.Controls.Add(this.dgvResultados);
             this.gbResultados.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gbResultados.Location = new System.Drawing.Point(12, 167);
+            this.gbResultados.Location = new System.Drawing.Point(12, 137);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(645, 303);
+            this.gbResultados.Size = new System.Drawing.Size(645, 276);
             this.gbResultados.TabIndex = 1;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Location = new System.Drawing.Point(450, 99);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(75, 23);
+            this.btnConsultar.TabIndex = 3;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnEditar
             // 
@@ -84,48 +92,69 @@ namespace TransporteFront.gui
             this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // dgvCargasResult
+            // dgvResultados
             // 
-            this.dgvCargasResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCargasResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCarga,
             this.fecha,
             this.patente,
             this.pesoTotal});
-            this.dgvCargasResult.Location = new System.Drawing.Point(14, 22);
-            this.dgvCargasResult.Name = "dgvCargasResult";
-            this.dgvCargasResult.RowTemplate.Height = 25;
-            this.dgvCargasResult.Size = new System.Drawing.Size(406, 246);
-            this.dgvCargasResult.TabIndex = 0;
+            this.dgvResultados.Location = new System.Drawing.Point(14, 22);
+            this.dgvResultados.Name = "dgvResultados";
+            this.dgvResultados.RowTemplate.Height = 25;
+            this.dgvResultados.Size = new System.Drawing.Size(406, 246);
+            this.dgvResultados.TabIndex = 0;
+            // 
+            // idCarga
+            // 
+            this.idCarga.HeaderText = "Column1";
+            this.idCarga.Name = "idCarga";
+            this.idCarga.Visible = false;
+            // 
+            // fecha
+            // 
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            // 
+            // patente
+            // 
+            this.patente.HeaderText = "Camion";
+            this.patente.Name = "patente";
+            // 
+            // pesoTotal
+            // 
+            this.pesoTotal.HeaderText = "Peso Total";
+            this.pesoTotal.Name = "pesoTotal";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtPeso);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtPatente);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.dtpHasta);
-            this.groupBox1.Controls.Add(this.dtpDesde);
+            this.groupBox1.Controls.Add(this.dtpFechaHasta);
+            this.groupBox1.Controls.Add(this.dtpFechaDesde);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 149);
+            this.groupBox1.Size = new System.Drawing.Size(645, 119);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Busqueda";
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(310, 94);
+            this.btnBuscar.Location = new System.Drawing.Point(344, 81);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 8;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtPatente
             // 
@@ -152,19 +181,19 @@ namespace TransporteFront.gui
             this.label2.TabIndex = 3;
             this.label2.Text = "Fecha hasta:";
             // 
-            // dtpHasta
+            // dtpFechaHasta
             // 
-            this.dtpHasta.Location = new System.Drawing.Point(441, 33);
-            this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(200, 23);
-            this.dtpHasta.TabIndex = 2;
+            this.dtpFechaHasta.Location = new System.Drawing.Point(441, 33);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(200, 23);
+            this.dtpFechaHasta.TabIndex = 2;
             // 
-            // dtpDesde
+            // dtpFechaDesde
             // 
-            this.dtpDesde.Location = new System.Drawing.Point(95, 33);
-            this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(226, 23);
-            this.dtpDesde.TabIndex = 1;
+            this.dtpFechaDesde.Location = new System.Drawing.Point(95, 33);
+            this.dtpFechaDesde.Name = "dtpFechaDesde";
+            this.dtpFechaDesde.Size = new System.Drawing.Size(226, 23);
+            this.dtpFechaDesde.TabIndex = 1;
             // 
             // label1
             // 
@@ -175,63 +204,17 @@ namespace TransporteFront.gui
             this.label1.TabIndex = 0;
             this.label1.Text = "Fecha desde:";
             // 
-            // txtPeso
-            // 
-            this.txtPeso.Location = new System.Drawing.Point(56, 116);
-            this.txtPeso.Name = "txtPeso";
-            this.txtPeso.Size = new System.Drawing.Size(231, 23);
-            this.txtPeso.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 15);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Peso:";
-            // 
-            // idCarga
-            // 
-            this.idCarga.HeaderText = "Column1";
-            this.idCarga.Name = "idCarga";
-            this.idCarga.Visible = false;
-            // 
-            // fecha
-            // 
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            // 
-            // patente
-            // 
-            this.patente.HeaderText = "Camion";
-            this.patente.Name = "patente";
-            // 
-            // pesoTotal
-            // 
-            this.pesoTotal.HeaderText = "Peso Total";
-            this.pesoTotal.Name = "pesoTotal";
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Location = new System.Drawing.Point(450, 99);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(75, 23);
-            this.btnConsultar.TabIndex = 3;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            // 
             // Frm_Consulta_Cargas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 482);
+            this.ClientSize = new System.Drawing.Size(669, 420);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Consulta_Cargas";
             this.Text = "Consulta Cargas";
             this.gbResultados.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCargasResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -243,21 +226,19 @@ namespace TransporteFront.gui
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.DataGridView dgvCargasResult;
+        private System.Windows.Forms.DataGridView dgvResultados;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtPatente;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpHasta;
-        private System.Windows.Forms.DateTimePicker dtpDesde;
+        private System.Windows.Forms.DateTimePicker dtpFechaHasta;
+        private System.Windows.Forms.DateTimePicker dtpFechaDesde;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCarga;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn patente;
         private System.Windows.Forms.DataGridViewTextBoxColumn pesoTotal;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtPeso;
     }
 }

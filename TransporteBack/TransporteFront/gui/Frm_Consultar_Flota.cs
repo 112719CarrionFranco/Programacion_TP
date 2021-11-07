@@ -62,16 +62,16 @@ namespace TransporteFront.gui
 
         private async Task<List<Camion>> CargarConsultaCamionesAsync(List<Parametro> filtros)
         {
-            List<Camion> listClte = new List<Camion>();
+            List<Camion> listCamion = new List<Camion>();
 
             string filtrosJson = JsonConvert.SerializeObject(filtros);
             string url = "https://localhost:44311/api/Cargas/consultaparam";
 
             var resultado = await ClienteSingleton.GetInstance().PostAsync(url, filtrosJson);
 
-            listClte = JsonConvert.DeserializeObject<List<Camion>>(resultado);
+            listCamion = JsonConvert.DeserializeObject<List<Camion>>(resultado);
 
-            return listClte;
+            return listCamion;
         }
 
         private async void btnEliminar_Click(object sender, EventArgs e)

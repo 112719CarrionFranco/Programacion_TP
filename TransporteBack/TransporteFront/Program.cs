@@ -18,7 +18,7 @@ namespace TransporteFront
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Alta_Cargas());
+            Application.Run(new Frm_Principal());
         }
     }
 }

@@ -45,8 +45,8 @@ namespace TransporteFront.gui
 
             //source es una lista de objetos
             cboCarga.DataSource = tabla;
-            cboCarga.ValueMember = tabla.Columns[0].ColumnName; //ID_TIPO_CARGA
             cboCarga.DisplayMember = tabla.Columns[1].ColumnName; //NOMBRE
+            cboCarga.ValueMember = tabla.Columns[0].ColumnName; //ID_TIPO_CARGA
 
         }
 
@@ -75,15 +75,16 @@ namespace TransporteFront.gui
             DialogResult result = MessageBox.Show("Desea Agregar?", "Confirmación", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
+                
                 DetalleCargas item = new DetalleCargas();
-                item.Cantidad = (int)nudCarga.Value;
+                item.Cantidad = Convert.ToInt32(nudCarga.Value);
 
                 DataRowView oDataRow = (DataRowView)cboCarga.SelectedItem;
 
-                TipoCarga oTipoCarga = new TipoCarga();
+                TipoCarga oTipoCarga = new TipoCarga(); ;
                 oTipoCarga.IdTipoCarga = Int32.Parse(oDataRow[0].ToString());
                 oTipoCarga.Nombre = oDataRow[1].ToString();
-                oTipoCarga.Peso = int.Parse(oDataRow[2].ToString());
+                oTipoCarga.Peso = Convert.ToInt32(oDataRow[2].ToString());
                 item.TipoCarga = oTipoCarga;
 
                 oCarga.AgregarDetalle(item);
@@ -124,7 +125,7 @@ namespace TransporteFront.gui
             if (saveOK)
             {
                 MessageBox.Show("Carga registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
+                
             }
             else
             {
@@ -164,6 +165,23 @@ namespace TransporteFront.gui
             string json = JsonConvert.SerializeObject(oCarga);
             var result = await ClienteSingleton.GetInstance().PostAsync(url, json);
             return result.Equals("true");
+        }
+
+        private void dgvDetalles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvDetalles.CurrentCell.ColumnIndex == 5)
+            {
+                oCarga.QuitarDetalle(dgvDetalles.CurrentRow.Index);
+                dgvDetalles.Rows.Remove(dgvDetalles.CurrentRow);
+                calcularPesosTotales();
+            }
+        }
+
+        private void btnLimpìar_Click(object sender, EventArgs e)
+        {
+            dgvDetalles.Rows.Clear();
+            nudCarga.Value = 0;
+            cboCamion.SelectedIndex = -1;
         }
     }
 }

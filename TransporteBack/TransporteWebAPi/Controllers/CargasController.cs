@@ -21,7 +21,7 @@ namespace TransporteWebAPi.Controllers
         }
 
         [HttpPost("registro")]
-        public IActionResult PostCliente(Carga oCarga)
+        public IActionResult Postcarga(Carga oCarga)
         {
             if (oCarga != null)
             {
@@ -60,12 +60,30 @@ namespace TransporteWebAPi.Controllers
             return Ok(service.ConsultarCamiones(filtros));
         }
 
+        // POST api/<CargasController>
+        [HttpPost("consultaparamCarga")]
+        public IActionResult PostConsultaCarga(List<Parametro> filtros)
+        {
+            if (filtros == null || filtros.Count == 0)
+                return BadRequest("Se requiere una lista de parámetros!");
+
+            return Ok(service.ConsultarCarga(filtros));
+        }
+
         [HttpDelete("{patente}")]
         public IActionResult Delete(string patente)
         {
             if (!String.IsNullOrEmpty(patente))
                 return BadRequest("se necesita la patente!");
             return Ok(service.RegistrarBajaCamion(patente));
+        }
+
+        [HttpDelete("{deleteCarga}")]
+        public IActionResult DeleteCarga(int idCarga)
+        {
+            if (idCarga == 0)
+                return BadRequest("se necesita la patente!");
+            return Ok(service.RegistrarBajaCarga(idCarga));
         }
     }
 }

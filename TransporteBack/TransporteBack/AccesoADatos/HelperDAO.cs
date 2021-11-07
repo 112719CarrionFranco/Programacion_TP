@@ -198,9 +198,15 @@ namespace TransporteBack.AccesoADatos
                 SqlParameter param = new SqlParameter("@ID_CARGA", SqlDbType.Int);
                 param.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(param);
+
+                SqlParameter param2 = new SqlParameter("@next", SqlDbType.Int);
+                param2.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(param2);
+
+
                 cmd.ExecuteNonQuery();
                 int IdCarga = Convert.ToInt32(param.Value);
-                int cDetalles = 1; // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
+                int cDetalles = Convert.ToInt32(param2.Value); ; // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
                 
 
 
@@ -222,11 +228,11 @@ namespace TransporteBack.AccesoADatos
 
                 trans.Commit();
             }
-            catch (Exception ex)
-            {
-                trans.Rollback();
-                resultado = false;
-            }
+            //catch (Exception ex)
+            //{
+            //    trans.Rollback();
+            //    resultado = false;
+            //}
             finally
             {
                 if (cnn != null && cnn.State == ConnectionState.Open)
@@ -317,41 +323,49 @@ namespace TransporteBack.AccesoADatos
         public List<Carga> GetByFilters(List<Parametro> criterios)
         {
             List<Carga> lst = new List<Carga>();
-            DataTable table = new DataTable();
+            DataTable tabla = new DataTable();
             SqlConnection cnn = new SqlConnection();
             cnn.ConnectionString = cadenaConexion;
+
             try
             {
                 cnn.Open();
 
-                SqlCommand cmd = new SqlCommand("[SP_CONSULTAR_CARGAS]", cnn);
+                SqlCommand cmd = new SqlCommand("SP_CONSULTAR_CARGAS", cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 foreach (Parametro p in criterios)
                 {
-                    cmd.Parameters.AddWithValue(p.Nombre, p.Valor);
+                    if (p.Valor == null)
+                        cmd.Parameters.AddWithValue(p.Nombre, DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue(p.Nombre, p.Valor.ToString());
                 }
 
-                table.Load(cmd.ExecuteReader());
-                //mappear los registros como objetos del dominio:
+                tabla.Load(cmd.ExecuteReader());
 
-                foreach (DataRow row in table.Rows)
+                foreach (DataRow row in tabla.Rows)
                 {
-                    //Por cada registro creamos un objeto del dominio
                     Carga oCarga = new Carga();
-                    oCarga.Patente = row["PATENTE"].ToString();
-                    oCarga.Fecha = Convert.ToDateTime(row["FECHA"].ToString());
-                    oCarga.PesoTotal = Convert.ToInt32(row["TOTAL_KG"].ToString());
                     oCarga.IdCarga = Convert.ToInt32(row["ID_CARGA"].ToString());
+                    oCarga.Fecha = Convert.ToDateTime(row["FECHA"].ToString());
+                    oCarga.Patente = row["PATENTE"].ToString();
+                    oCarga.PesoTotal = Convert.ToInt32(row["TOTAL_KG"].ToString());
+
+
                     lst.Add(oCarga);
                 }
-
-                cnn.Close();
             }
-            catch (SqlException)
+            catch (Exception ex)
             {
-                lst = null;
+                throw ex;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
             }
             return lst;
+
         }
 
         public bool Update(Carga oCarga)

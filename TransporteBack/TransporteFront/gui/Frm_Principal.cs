@@ -47,7 +47,8 @@ namespace TransporteFront.gui
 
         private void consultarCargasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Frm_Consulta_Cargas frmConsultaCargas = new Frm_Consulta_Cargas();
+            frmConsultaCargas.ShowDialog();
         }
 
         private void agregarTipoDeCargasToolStripMenuItem_Click(object sender, EventArgs e)
