@@ -23,7 +23,24 @@ namespace TransporteBack.AccesoADatos
 
         public List<Carga> ConsultarCarga(List<Parametro> criterios)
         {
-            return HelperDAO.ObtenerInstancia().GetByFilters(criterios);
+            List<Carga> listCarga = new List<Carga>();
+            DataTable tabla = HelperDAO.ObtenerInstancia().ConsultaTablaParamCarga(criterios);
+
+
+            foreach (DataRow row in tabla.Rows)
+            {
+                //Por cada registro creamos un objeto del dominio
+                Carga oCarga = new Carga();
+                oCarga.IdCarga = Convert.ToInt32(row["ID_CARGA"].ToString());
+                oCarga.Fecha = Convert.ToDateTime(row["FECHA"].ToString());
+                oCarga.Patente = row["PATENTE"].ToString();
+                oCarga.PesoTotal = Convert.ToInt32(row["TOTAL_KG"].ToString());
+
+                listCarga.Add(oCarga);
+            }
+
+            return listCarga;
+
         }
 
         public bool ControlUsuarios(string usuario, string pass)

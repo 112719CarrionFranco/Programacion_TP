@@ -32,13 +32,24 @@ namespace TransporteWebAPi.Controllers
             return BadRequest("Se requiere la patente del camion");
         }
 
-        // GET api/<CargasController>/5
-        [HttpGet("obtenerCargaID")]
-        public IActionResult Get(int id)
+        [HttpPost("actualizar")]
+        public IActionResult PostActualizar(Carga oCarga)
         {
-            if (id == 0)
-                return BadRequest("Id es requerido!");
-            return Ok(service.ObtenerCargaPorID(id));
+            if (oCarga != null)
+            {
+                bool result = service.ActualizarCarga(oCarga);
+                return Ok(result);
+            }
+
+            return BadRequest("Se requiere la patente del camion");
+        }
+
+        [HttpGet("{nro}")]
+        public IActionResult Get(int nro)
+        {
+            if (nro == 0)
+                return BadRequest("Se requiere Nro de Carga");
+            return Ok(service.ObtenerCargaPorID(nro));
         }
 
         // GET api/<CargasController>/5
@@ -48,6 +59,15 @@ namespace TransporteWebAPi.Controllers
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseña))
                 return BadRequest("Falta usuario o contraseña!");
             return Ok(service.ControlUsuarios(usuario,contraseña));
+        }
+
+        // GET api/<CargasController>/5
+        [HttpGet("consultaSinParametro")]
+        public IActionResult Login(string sp)
+        {
+            if (string.IsNullOrEmpty(sp))
+                return BadRequest("Falta sp!");
+            return Ok(service.ConsultarSP(sp));
         }
 
         // POST api/<CargasController>
@@ -61,7 +81,7 @@ namespace TransporteWebAPi.Controllers
         }
 
         // POST api/<CargasController>
-        [HttpPost("consultaparamCarga")]
+        [HttpPost("consultapCarga")]
         public IActionResult PostConsultaCarga(List<Parametro> filtros)
         {
             if (filtros == null || filtros.Count == 0)
@@ -78,12 +98,6 @@ namespace TransporteWebAPi.Controllers
             return Ok(service.RegistrarBajaCamion(patente));
         }
 
-        [HttpDelete("{deleteCarga}")]
-        public IActionResult DeleteCarga(int idCarga)
-        {
-            if (idCarga == 0)
-                return BadRequest("se necesita la patente!");
-            return Ok(service.RegistrarBajaCarga(idCarga));
-        }
+        
     }
 }

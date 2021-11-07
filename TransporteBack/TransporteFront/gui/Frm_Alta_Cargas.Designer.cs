@@ -30,10 +30,11 @@ namespace TransporteFront.gui
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblNumCarga = new System.Windows.Forms.Label();
             this.lblCargaMinima = new System.Windows.Forms.Label();
             this.lblCargaMaxima = new System.Windows.Forms.Label();
             this.lblPesoTotal = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpìar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.dgvDetalles = new System.Windows.Forms.DataGridView();
@@ -57,10 +58,11 @@ namespace TransporteFront.gui
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblNumCarga);
             this.groupBox1.Controls.Add(this.lblCargaMinima);
             this.groupBox1.Controls.Add(this.lblCargaMaxima);
             this.groupBox1.Controls.Add(this.lblPesoTotal);
-            this.groupBox1.Controls.Add(this.btnSalir);
+            this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.btnLimpìar);
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.dgvDetalles);
@@ -76,6 +78,16 @@ namespace TransporteFront.gui
             this.groupBox1.Size = new System.Drawing.Size(576, 355);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // lblNumCarga
+            // 
+            this.lblNumCarga.AutoSize = true;
+            this.lblNumCarga.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNumCarga.Location = new System.Drawing.Point(367, 23);
+            this.lblNumCarga.Name = "lblNumCarga";
+            this.lblNumCarga.Size = new System.Drawing.Size(135, 19);
+            this.lblNumCarga.TabIndex = 15;
+            this.lblNumCarga.Text = "Numero de carga: ";
             // 
             // lblCargaMinima
             // 
@@ -104,16 +116,16 @@ namespace TransporteFront.gui
             this.lblPesoTotal.TabIndex = 12;
             this.lblPesoTotal.Text = "Peso Total:";
             // 
-            // btnSalir
+            // btnCancelar
             // 
-            this.btnSalir.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSalir.Location = new System.Drawing.Point(109, 327);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 9;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnCancelar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelar.Location = new System.Drawing.Point(109, 327);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnLimpìar
             // 
@@ -223,6 +235,7 @@ namespace TransporteFront.gui
             this.cboCamion.Name = "cboCamion";
             this.cboCamion.Size = new System.Drawing.Size(181, 23);
             this.cboCamion.TabIndex = 4;
+            this.cboCamion.SelectedIndexChanged += new System.EventHandler(this.cboCamion_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -282,7 +295,7 @@ namespace TransporteFront.gui
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label txtTipoForm;
-        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnLimpìar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label lblCargaMinima;
@@ -295,5 +308,6 @@ namespace TransporteFront.gui
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn pesoTotal;
         private System.Windows.Forms.DataGridViewButtonColumn accion;
+        private System.Windows.Forms.Label lblNumCarga;
     }
 }

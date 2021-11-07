@@ -38,8 +38,6 @@ namespace TransporteFront.gui
             this.cargasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarCargasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarCargasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarTipoDeCargasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarTipoDeCargasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -100,9 +98,7 @@ namespace TransporteFront.gui
             // 
             this.cargasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarCargasToolStripMenuItem,
-            this.consultarCargasToolStripMenuItem,
-            this.agregarTipoDeCargasToolStripMenuItem,
-            this.consultarTipoDeCargasToolStripMenuItem});
+            this.consultarCargasToolStripMenuItem});
             this.cargasToolStripMenuItem.Name = "cargasToolStripMenuItem";
             this.cargasToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.cargasToolStripMenuItem.Text = "Cargas";
@@ -110,29 +106,16 @@ namespace TransporteFront.gui
             // agregarCargasToolStripMenuItem
             // 
             this.agregarCargasToolStripMenuItem.Name = "agregarCargasToolStripMenuItem";
-            this.agregarCargasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.agregarCargasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarCargasToolStripMenuItem.Text = "Agregar Cargas";
             this.agregarCargasToolStripMenuItem.Click += new System.EventHandler(this.agregarCargasToolStripMenuItem_Click);
             // 
             // consultarCargasToolStripMenuItem
             // 
             this.consultarCargasToolStripMenuItem.Name = "consultarCargasToolStripMenuItem";
-            this.consultarCargasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.consultarCargasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.consultarCargasToolStripMenuItem.Text = "Consultar Cargas";
             this.consultarCargasToolStripMenuItem.Click += new System.EventHandler(this.consultarCargasToolStripMenuItem_Click);
-            // 
-            // agregarTipoDeCargasToolStripMenuItem
-            // 
-            this.agregarTipoDeCargasToolStripMenuItem.Name = "agregarTipoDeCargasToolStripMenuItem";
-            this.agregarTipoDeCargasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.agregarTipoDeCargasToolStripMenuItem.Text = "Agregar Tipo de Cargas";
-            this.agregarTipoDeCargasToolStripMenuItem.Click += new System.EventHandler(this.agregarTipoDeCargasToolStripMenuItem_Click);
-            // 
-            // consultarTipoDeCargasToolStripMenuItem
-            // 
-            this.consultarTipoDeCargasToolStripMenuItem.Name = "consultarTipoDeCargasToolStripMenuItem";
-            this.consultarTipoDeCargasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.consultarTipoDeCargasToolStripMenuItem.Text = "Consultar Tipo de cargas";
             // 
             // ayudaToolStripMenuItem
             // 
@@ -178,7 +161,5 @@ namespace TransporteFront.gui
         private System.Windows.Forms.ToolStripMenuItem consultarCargasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem agregarTipoDeCargasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consultarTipoDeCargasToolStripMenuItem;
     }
 }

@@ -206,7 +206,7 @@ namespace TransporteBack.AccesoADatos
 
                 cmd.ExecuteNonQuery();
                 int IdCarga = Convert.ToInt32(param.Value);
-                int cDetalles = Convert.ToInt32(param2.Value); ; // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
+                int cDetalles = Convert.ToInt32(param2.Value);  // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
                 
 
 
@@ -265,7 +265,6 @@ namespace TransporteBack.AccesoADatos
                 {
                     //solo para el primer resultado recuperamos los datos del MAESTRO:
                     oCarga.IdCarga = Convert.ToInt32(reader["carga_nro"].ToString());
-                    oCarga.PesoTotal = Convert.ToInt32(reader["peso"].ToString());
                     oCarga.Fecha = Convert.ToDateTime(reader["fecha"].ToString());
                     oCarga.Patente = (reader["patente"].ToString());
                     esPrimerRegistro = false;
@@ -294,16 +293,17 @@ namespace TransporteBack.AccesoADatos
             {
                 cnn.Open();
                 t = cnn.BeginTransaction();
+                SqlCommand cmd2 = new SqlCommand("[SP_ELIMINAR_DETALLE_CARGA]", cnn, t);
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@id_Carga", idCarga);
+                affected = cmd2.ExecuteNonQuery();
+
                 SqlCommand cmd = new SqlCommand("[SP_ELIMINAR_CARGA]", cnn, t);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_Carga", idCarga);
                 affected = cmd.ExecuteNonQuery();
 
 
-                SqlCommand cmd2 = new SqlCommand("[SP_ELIMINAR_DETALLE_CARGA]", cnn, t);
-                cmd2.CommandType = CommandType.StoredProcedure;
-                cmd2.Parameters.AddWithValue("@id_Carga", idCarga);
-                affected = cmd.ExecuteNonQuery();
                 t.Commit();
 
             }
@@ -320,9 +320,8 @@ namespace TransporteBack.AccesoADatos
             return affected == 1;
         }
 
-        public List<Carga> GetByFilters(List<Parametro> criterios)
+        public DataTable ConsultaTablaParamCarga(List<Parametro> criterios)
         {
-            List<Carga> lst = new List<Carga>();
             DataTable tabla = new DataTable();
             SqlConnection cnn = new SqlConnection();
             cnn.ConnectionString = cadenaConexion;
@@ -330,30 +329,19 @@ namespace TransporteBack.AccesoADatos
             try
             {
                 cnn.Open();
+                SqlCommand cmd = new SqlCommand("[SP_CONSULTAR_CARGAS]", cnn);
 
-                SqlCommand cmd = new SqlCommand("SP_CONSULTAR_CARGAS", cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                foreach (Parametro p in criterios)
+
+                foreach (Parametro param in criterios)
                 {
-                    if (p.Valor == null)
-                        cmd.Parameters.AddWithValue(p.Nombre, DBNull.Value);
+                    if (param.Valor == null)
+                        cmd.Parameters.AddWithValue(param.Nombre, DBNull.Value);
                     else
-                        cmd.Parameters.AddWithValue(p.Nombre, p.Valor.ToString());
+                        cmd.Parameters.AddWithValue(param.Nombre, param.Valor.ToString());
                 }
 
                 tabla.Load(cmd.ExecuteReader());
-
-                foreach (DataRow row in tabla.Rows)
-                {
-                    Carga oCarga = new Carga();
-                    oCarga.IdCarga = Convert.ToInt32(row["ID_CARGA"].ToString());
-                    oCarga.Fecha = Convert.ToDateTime(row["FECHA"].ToString());
-                    oCarga.Patente = row["PATENTE"].ToString();
-                    oCarga.PesoTotal = Convert.ToInt32(row["TOTAL_KG"].ToString());
-
-
-                    lst.Add(oCarga);
-                }
             }
             catch (Exception ex)
             {
@@ -364,8 +352,7 @@ namespace TransporteBack.AccesoADatos
                 if (cnn != null && cnn.State == ConnectionState.Open)
                     cnn.Close();
             }
-            return lst;
-
+            return tabla;
         }
 
         public bool Update(Carga oCarga)
@@ -385,15 +372,19 @@ namespace TransporteBack.AccesoADatos
                 cmd.Parameters.AddWithValue("@id_carga", oCarga.IdCarga);
                 cmd.Parameters.AddWithValue("@patente", oCarga.Patente);
                 cmd.Parameters.AddWithValue("@total_kg", oCarga.PesoTotal);
+                SqlParameter param = new SqlParameter("@next", SqlDbType.Int);
+
+                param.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();
 
-                SqlCommand cmdElimnar = new SqlCommand("SP_ELIMINAR_DETALLE_PRESUPUESTO", cnn, trans);
+                SqlCommand cmdElimnar = new SqlCommand("SP_ELIMINAR_DETALLE_CARGA", cnn, trans);
                 cmdElimnar.CommandType = CommandType.StoredProcedure;
                 cmdElimnar.Parameters.AddWithValue("@id_carga", oCarga.IdCarga);
                 cmdElimnar.ExecuteNonQuery();
 
 
-                int cDetalles = 1; // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
+                int cDetalles = Convert.ToInt32(param.Value);  // es el ID que forma de la PK doble entre ID_PRESUPUESTO E ID_DETALLE
                 foreach (DetalleCargas det in oCarga.Detalles)
                 {
                     SqlCommand cmdDet = new SqlCommand("SP_INSERTAR_DETALLE", cnn);

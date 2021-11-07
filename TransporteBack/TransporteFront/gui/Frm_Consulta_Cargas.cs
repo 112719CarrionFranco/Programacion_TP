@@ -24,22 +24,9 @@ namespace TransporteFront.gui
             InitializeComponent();
             oCarga = new Carga();
             servicio = new ServiceFactoryImp().CrearService();
-
         }
 
-        private async Task<List<Carga>> CargarConsultaCargaASYNC(List<Parametro> filtros)
-        {
-            List<Carga> listCamion = new List<Carga>();
-
-            string filtrosJson = JsonConvert.SerializeObject(filtros);
-            string url = "https://localhost:44311/api/Cargas/consultaparamCarga";
-
-            var resultado = await ClienteSingleton.GetInstance().PostAsync(url, filtrosJson);
-
-            listCamion = JsonConvert.DeserializeObject<List<Carga>>(resultado);
-
-            return listCamion;
-        }
+       
 
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -52,13 +39,12 @@ namespace TransporteFront.gui
                 return;
             }
             object valor1 = DBNull.Value, valor2 = DBNull.Value, valor3 = DBNull.Value;
-            string conBaja = "N";
             //----------------------------------------------
-            valor1 = Convert.ToDateTime(dtpFechaDesde.Value.Date);
+            valor1 = Convert.ToDateTime(dtpFechaDesde.Value.ToString("dd/MM/yyyy"));
             filtros.Add(new Parametro("@fecha_desde", valor1));
             //----------------------------------------------
-            valor1 = Convert.ToDateTime(dtpFechaHasta.Value.Date);
-            filtros.Add(new Parametro("@fecha_hasta", valor1));
+            valor2 = Convert.ToDateTime(dtpFechaHasta.Value.ToString("dd/MM/yyyy"));
+            filtros.Add(new Parametro("@fecha_hasta", valor2));
             //----------------------------------------------
             if (!String.IsNullOrEmpty(txtPatente.Text))
                 valor3 = txtPatente.Text;
@@ -75,13 +61,24 @@ namespace TransporteFront.gui
                     oCarga.PesoTotal,});
             }
 
-            if (dgvResultados.RowCount == 0)
-                MessageBox.Show("No Existen Coincidencias para los Parámetros de su Consulta",
-                                "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
-        private async void btnEliminar_Click(object sender, EventArgs e)
+        private async Task<List<Carga>> CargarConsultaCargaASYNC(List<Parametro> filtros)
+        {
+            List<Carga> listCamion = new List<Carga>();
+
+            string filtrosJson = JsonConvert.SerializeObject(filtros);
+            string url = "https://localhost:44311/api/Cargas/consultapCarga";
+
+            var resultado = await ClienteSingleton.GetInstance().PostAsync(url, filtrosJson);
+
+            listCamion = JsonConvert.DeserializeObject<List<Carga>>(resultado);
+
+            return listCamion;
+        }
+
+        private  void btnEliminar_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dgvResultados.CurrentRow;
 
@@ -105,7 +102,26 @@ namespace TransporteFront.gui
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
+            DataGridViewRow row = dgvResultados.CurrentRow;
+            if (row != null)
+            {
+                int idCarga = Convert.ToInt32(dgvResultados.CurrentRow.Cells["idCarga"].Value.ToString());
+                Frm_Alta_Cargas form = new Frm_Alta_Cargas(Accion.VER, idCarga);
+                form.ShowDialog();
 
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = dgvResultados.CurrentRow;
+            if (row != null)
+            {
+                int idCarga = Convert.ToInt32(dgvResultados.CurrentRow.Cells["idCarga"].Value.ToString());
+                Frm_Alta_Cargas form = new Frm_Alta_Cargas(Accion.EDITAR, idCarga);
+                form.ShowDialog();
+
+            }
         }
 
         //private async Task<bool> BajaCargaAsync(int idCarga)

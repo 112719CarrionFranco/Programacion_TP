@@ -41,23 +41,16 @@ namespace TransporteFront.gui
 
         private void agregarCargasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_Alta_Cargas frmAltaCargas = new Frm_Alta_Cargas();
+            Frm_Alta_Cargas frmAltaCargas = new Frm_Alta_Cargas(Accion.NUEVO,0);
             frmAltaCargas.ShowDialog();
         }
+
+ 
 
         private void consultarCargasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Frm_Consulta_Cargas frmConsultaCargas = new Frm_Consulta_Cargas();
             frmConsultaCargas.ShowDialog();
         }
-
-        private void agregarTipoDeCargasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Frm_Alta_Tipo_Carga frmAltaTipoCarga = new Frm_Alta_Tipo_Carga();
-            frmAltaTipoCarga.ShowDialog();
-        }
-
-
-
     }
 }

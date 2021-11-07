@@ -28,7 +28,5 @@ D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Principal.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Alta_Camion.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Alta_Cargas.resources
-D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Alta_Tipo_Carga.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consultar_Flota.resources
 D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consulta_Cargas.resources
-D:\Facultad\Tecnicatura\Segundo Cuatrimestre\Programacion 2\Trabajo Practico\Git\Programacion_TP\TransporteBack\TransporteFront\obj\Debug\net5.0-windows\TransporteFront.gui.Frm_Consulta_TCarga.resources

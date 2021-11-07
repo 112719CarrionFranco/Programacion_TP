@@ -83,6 +83,7 @@ namespace TransporteFront.gui
             this.btnEditar.TabIndex = 2;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
@@ -96,6 +97,8 @@ namespace TransporteFront.gui
             // 
             // dgvResultados
             // 
+            this.dgvResultados.AllowUserToAddRows = false;
+            this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCarga,
@@ -148,7 +151,7 @@ namespace TransporteFront.gui
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(344, 81);
+            this.btnBuscar.Location = new System.Drawing.Point(330, 77);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 8;
@@ -194,6 +197,7 @@ namespace TransporteFront.gui
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(226, 23);
             this.dtpFechaDesde.TabIndex = 1;
+            this.dtpFechaDesde.Value = new System.DateTime(2021, 11, 1, 0, 0, 0, 0);
             // 
             // label1
             // 
