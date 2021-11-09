@@ -46,8 +46,7 @@ namespace TransporteFront.gui
             valor2 = Convert.ToDateTime(dtpFechaHasta.Value.ToString("dd/MM/yyyy"));
             filtros.Add(new Parametro("@fecha_hasta", valor2));
             //----------------------------------------------
-            if (!String.IsNullOrEmpty(txtPatente.Text))
-                valor3 = txtPatente.Text;
+            valor3 = txtPatente.Text;
             filtros.Add(new Parametro("@patente", valor3));
 
             List<Carga> lista = await CargarConsultaCargaASYNC(filtros);
@@ -78,7 +77,7 @@ namespace TransporteFront.gui
             return listCamion;
         }
 
-        private  void btnEliminar_Click(object sender, EventArgs e)
+        private async void btnEliminar_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dgvResultados.CurrentRow;
 
@@ -87,15 +86,15 @@ namespace TransporteFront.gui
                 int idCarga = Int32.Parse(row.Cells["idCarga"].Value.ToString()); // fila actual o seleccionada
                 if (MessageBox.Show("Seguro que desea eliminar la carga seleccionada?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    bool respuesta = servicio.RegistrarBajaCarga(idCarga);
+                    bool respuesta = await BajaCargaAsync(idCarga);
 
                     if (respuesta)
                     {
-                        MessageBox.Show("Presupuesto eliminado!", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Carga eliminada", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //this.btnConsultar_Click(null, null);
                     }
                     else
-                        MessageBox.Show("Error al intentar borrar el presupuesto!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se pudo eliminar la carga!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -124,11 +123,11 @@ namespace TransporteFront.gui
             }
         }
 
-        //private async Task<bool> BajaCargaAsync(int idCarga)
-        //{
-        //    string url = "https://localhost:44311/api/Cargas/deleteCarga" + idCarga.ToString();
-        //    var result = await ClienteSingleton.GetInstance().DeleteAsync(url);
-        //    return result.Equals("true");
-        //}
+        private async Task<bool> BajaCargaAsync(int idCarga)
+        {
+            string url = "https://localhost:44311/api/Cargas/borrarCarga/" + idCarga.ToString();
+            var result = await ClienteSingleton.GetInstance().DeleteAsync(url);
+            return result.Equals("true");
+        }
     }
 }

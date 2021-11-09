@@ -29,6 +29,7 @@ namespace TransporteFront.gui
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Alta_Cargas));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblNumCarga = new System.Windows.Forms.Label();
             this.lblCargaMinima = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace TransporteFront.gui
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Cornsilk;
             this.groupBox1.Controls.Add(this.lblNumCarga);
             this.groupBox1.Controls.Add(this.lblCargaMinima);
             this.groupBox1.Controls.Add(this.lblCargaMaxima);
@@ -163,6 +165,7 @@ namespace TransporteFront.gui
             this.accion});
             this.dgvDetalles.Location = new System.Drawing.Point(12, 148);
             this.dgvDetalles.Name = "dgvDetalles";
+            this.dgvDetalles.ReadOnly = true;
             this.dgvDetalles.RowTemplate.Height = 25;
             this.dgvDetalles.Size = new System.Drawing.Size(546, 173);
             this.dgvDetalles.TabIndex = 8;
@@ -172,32 +175,38 @@ namespace TransporteFront.gui
             // 
             this.idTipoCarga.HeaderText = "Column1";
             this.idTipoCarga.Name = "idTipoCarga";
+            this.idTipoCarga.ReadOnly = true;
             this.idTipoCarga.Visible = false;
             // 
             // tipo_Carga
             // 
             this.tipo_Carga.HeaderText = "Tipo de Carga";
             this.tipo_Carga.Name = "tipo_Carga";
+            this.tipo_Carga.ReadOnly = true;
             // 
             // peso
             // 
             this.peso.HeaderText = "Peso";
             this.peso.Name = "peso";
+            this.peso.ReadOnly = true;
             // 
             // cantidad
             // 
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
             // 
             // pesoTotal
             // 
             this.pesoTotal.HeaderText = "Peso Total";
             this.pesoTotal.Name = "pesoTotal";
+            this.pesoTotal.ReadOnly = true;
             // 
             // accion
             // 
             this.accion.HeaderText = "Quitar";
             this.accion.Name = "accion";
+            this.accion.ReadOnly = true;
             this.accion.Text = "Quitar";
             this.accion.ToolTipText = "Quitar";
             this.accion.UseColumnTextForButtonValue = true;
@@ -271,10 +280,13 @@ namespace TransporteFront.gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(589, 379);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Alta_Cargas";
-            this.Text = "Alta Cargas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "REGISTRO DE CARGAS";
             this.Load += new System.EventHandler(this.Frm_Alta_Cargas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

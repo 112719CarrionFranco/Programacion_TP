@@ -19,7 +19,8 @@ namespace TransporteFront.gui
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sistema de gestion de cargas. \nRealizado por Franco Carrion", "SGC",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            Frm_AcercaDe frmAcerca = new Frm_AcercaDe();
+            frmAcerca.ShowDialog();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

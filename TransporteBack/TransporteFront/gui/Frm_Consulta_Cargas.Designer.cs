@@ -29,6 +29,7 @@ namespace TransporteFront.gui
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Consulta_Cargas));
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
@@ -107,6 +108,7 @@ namespace TransporteFront.gui
             this.pesoTotal});
             this.dgvResultados.Location = new System.Drawing.Point(14, 22);
             this.dgvResultados.Name = "dgvResultados";
+            this.dgvResultados.ReadOnly = true;
             this.dgvResultados.RowTemplate.Height = 25;
             this.dgvResultados.Size = new System.Drawing.Size(406, 246);
             this.dgvResultados.TabIndex = 0;
@@ -115,22 +117,26 @@ namespace TransporteFront.gui
             // 
             this.idCarga.HeaderText = "Column1";
             this.idCarga.Name = "idCarga";
+            this.idCarga.ReadOnly = true;
             this.idCarga.Visible = false;
             // 
             // fecha
             // 
             this.fecha.HeaderText = "Fecha";
             this.fecha.Name = "fecha";
+            this.fecha.ReadOnly = true;
             // 
             // patente
             // 
             this.patente.HeaderText = "Camion";
             this.patente.Name = "patente";
+            this.patente.ReadOnly = true;
             // 
             // pesoTotal
             // 
             this.pesoTotal.HeaderText = "Peso Total";
             this.pesoTotal.Name = "pesoTotal";
+            this.pesoTotal.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -212,11 +218,14 @@ namespace TransporteFront.gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(669, 420);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Consulta_Cargas";
-            this.Text = "Consulta Cargas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CONSULTA CARGAS";
             this.gbResultados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).EndInit();
             this.groupBox1.ResumeLayout(false);

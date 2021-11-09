@@ -81,19 +81,19 @@ namespace TransporteFront.gui
             {
                 string patente = (row.Cells["patente"].Value.ToString());
 
-                if (MessageBox.Show("Seguro que desea quitar el camion de la flota?",
+                if (MessageBox.Show("Seguro que desea quitar el Camion de la flota?",
                                     "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     bool respuesta = await QuitarCamionAsync(patente);
 
                     if (respuesta)
                     {
-                        MessageBox.Show("El Cliente ha sido dado de Baja",
+                        MessageBox.Show("El Camion ha sido retirado de la flota",
                                         "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //this.btnConsultar_Click(null, null);
                     }
                     else
-                        MessageBox.Show("La Baja de Cliente no pudo realizarse",
+                        MessageBox.Show("No se pudo retirar el camion",
                                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -101,7 +101,7 @@ namespace TransporteFront.gui
 
         private async Task<bool> QuitarCamionAsync(string patente)
         {
-            string url = "https://localhost:44311/api/Cargas/" + patente.ToString();
+            string url = "https://localhost:44311/api/Cargas/borrar/" + patente.ToString();
             var result = await ClienteSingleton.GetInstance().DeleteAsync(url);
             return result.Equals("true");
         }

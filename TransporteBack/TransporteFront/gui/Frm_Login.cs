@@ -50,5 +50,7 @@ namespace TransporteFront.gui
             servicio = new ServiceFactoryImp().CrearService();
             txtContraseña.PasswordChar = '*';
         }
+
+     
     }
 }

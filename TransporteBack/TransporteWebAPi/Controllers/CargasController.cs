@@ -44,15 +44,15 @@ namespace TransporteWebAPi.Controllers
             return BadRequest("Se requiere la patente del camion");
         }
 
-        [HttpGet("{nro}")]
-        public IActionResult Get(int nro)
+        [HttpGet("consulta/{id}")]
+        public IActionResult Get(int id)
         {
-            if (nro == 0)
+            if (id == 0)
                 return BadRequest("Se requiere Nro de Carga");
-            return Ok(service.ObtenerCargaPorID(nro));
+            return Ok(service.ObtenerCargaPorID(id));
         }
 
-        [HttpGet("{patente}")]
+        [HttpGet("MaxMin/{patente}")]
         public IActionResult CargaMaxima(string patente)
         {
             if (string.IsNullOrEmpty(patente))
@@ -71,7 +71,7 @@ namespace TransporteWebAPi.Controllers
 
         // GET api/<CargasController>/5
         [HttpGet("consultaSinParametro")]
-        public IActionResult Login(string sp)
+        public IActionResult ConsultaSP(string sp)
         {
             if (string.IsNullOrEmpty(sp))
                 return BadRequest("Falta sp!");
@@ -98,14 +98,21 @@ namespace TransporteWebAPi.Controllers
             return Ok(service.ConsultarCarga(filtros));
         }
 
-        [HttpDelete("{patente}")]
+        [HttpDelete("borrar/{patente}")]
         public IActionResult Delete(string patente)
         {
-            if (!String.IsNullOrEmpty(patente))
+            if (string.IsNullOrEmpty(patente))
                 return BadRequest("se necesita la patente!");
             return Ok(service.RegistrarBajaCamion(patente));
         }
 
-        
+
+        [HttpDelete("borrarCarga/{idCarga}")]
+        public IActionResult DeleteCarga(int idCarga)
+        {
+            if (idCarga == 0)
+                return BadRequest("se necesita el id!");
+            return Ok(service.RegistrarBajaCarga(idCarga));
+        }
     }
 }

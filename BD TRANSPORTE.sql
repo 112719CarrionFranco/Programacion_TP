@@ -154,7 +154,7 @@ AS
 		SET @next = (SELECT MAX(DETALLE_NRO)+1  FROM DETALLE_CARGAS);
 	END
 
-CREATE PROCEDURE SP_CARGA_MAX 'fgh456', @peso_max = int
+CREATE PROCEDURE SP_CARGA_MAX 
 @patente varchar(7),
 @peso_max int output
 	as

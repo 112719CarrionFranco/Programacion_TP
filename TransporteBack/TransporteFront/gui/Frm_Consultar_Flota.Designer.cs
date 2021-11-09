@@ -29,6 +29,7 @@ namespace TransporteFront.gui
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Consultar_Flota));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtEstado = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@ namespace TransporteFront.gui
             this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pesoMax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechab = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCamiones)).BeginInit();
@@ -59,7 +59,7 @@ namespace TransporteFront.gui
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 66);
+            this.groupBox1.Size = new System.Drawing.Size(682, 66);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Busqueda";
@@ -113,14 +113,14 @@ namespace TransporteFront.gui
             this.gbResultados.Controls.Add(this.dgvCamiones);
             this.gbResultados.Location = new System.Drawing.Point(12, 84);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(776, 217);
+            this.gbResultados.Size = new System.Drawing.Size(682, 217);
             this.gbResultados.TabIndex = 0;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(615, 178);
+            this.btnEditar.Location = new System.Drawing.Point(520, 178);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 2;
@@ -129,7 +129,7 @@ namespace TransporteFront.gui
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(517, 178);
+            this.btnEliminar.Location = new System.Drawing.Point(422, 178);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 1;
@@ -139,59 +139,64 @@ namespace TransporteFront.gui
             // 
             // dgvCamiones
             // 
+            this.dgvCamiones.AllowUserToAddRows = false;
+            this.dgvCamiones.AllowUserToDeleteRows = false;
             this.dgvCamiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCamiones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patente,
             this.marca,
             this.modelo,
             this.estado,
-            this.pesoMax,
-            this.fechab});
-            this.dgvCamiones.Location = new System.Drawing.Point(44, 22);
+            this.pesoMax});
+            this.dgvCamiones.Location = new System.Drawing.Point(92, 22);
             this.dgvCamiones.Name = "dgvCamiones";
+            this.dgvCamiones.ReadOnly = true;
             this.dgvCamiones.RowTemplate.Height = 25;
-            this.dgvCamiones.Size = new System.Drawing.Size(646, 150);
+            this.dgvCamiones.Size = new System.Drawing.Size(548, 150);
             this.dgvCamiones.TabIndex = 0;
             // 
             // patente
             // 
             this.patente.HeaderText = "Patente";
             this.patente.Name = "patente";
+            this.patente.ReadOnly = true;
             // 
             // marca
             // 
             this.marca.HeaderText = "Marca";
             this.marca.Name = "marca";
+            this.marca.ReadOnly = true;
             // 
             // modelo
             // 
             this.modelo.HeaderText = "Modelo";
             this.modelo.Name = "modelo";
+            this.modelo.ReadOnly = true;
             // 
             // estado
             // 
             this.estado.HeaderText = "Estado";
             this.estado.Name = "estado";
+            this.estado.ReadOnly = true;
             // 
             // pesoMax
             // 
             this.pesoMax.HeaderText = "Peso Maximo";
             this.pesoMax.Name = "pesoMax";
-            // 
-            // fechab
-            // 
-            this.fechab.HeaderText = "Fecha Baja";
-            this.fechab.Name = "fechab";
+            this.pesoMax.ReadOnly = true;
             // 
             // Frm_Consultar_Flota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 311);
+            this.BackColor = System.Drawing.Color.Cornsilk;
+            this.ClientSize = new System.Drawing.Size(706, 311);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Consultar_Flota";
-            this.Text = "Consulta Camiones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CONSULTA CAMIONES";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbResultados.ResumeLayout(false);
@@ -217,6 +222,5 @@ namespace TransporteFront.gui
         private System.Windows.Forms.DataGridViewTextBoxColumn modelo;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn pesoMax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechab;
     }
 }

@@ -25,17 +25,15 @@ namespace TransporteFront.gui
     public partial class Frm_Alta_Cargas : Form
     {
         Carga oCarga = new Carga();
-        Camion oCamion = new Camion();
         private Accion modo;
-        private int nro;
-        //El service hay que sacarlo para poner la consulta que llena los combos en la api
+        private int id;
         private IService servicio;
 
-        public Frm_Alta_Cargas(Accion modo, int nro)
+        public Frm_Alta_Cargas(Accion modo, int id)
         {
             InitializeComponent();
             this.modo = modo;
-            this.nro = nro;
+            this.id = id;
             servicio = new ServiceFactoryImp().CrearService();
         }
 
@@ -72,7 +70,7 @@ namespace TransporteFront.gui
             if (rta == DialogResult.Yes)
             {
                 if (modo.Equals(Accion.NUEVO))
-                    LimpiarCampos();
+                    this.Dispose();
                 if (modo.Equals(Accion.EDITAR))
                     this.Dispose();
             }
@@ -87,7 +85,8 @@ namespace TransporteFront.gui
                 //para la api despues
                 CargarComboCamion();
                 CargarComboCarga();
-                //await CargarNroCarga();
+                CargaMinimaYMaximaLabel(servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString()));
+                
             }
             //------------------------------------------------------------
             if (modo.Equals(Accion.VER))
@@ -100,7 +99,7 @@ namespace TransporteFront.gui
                 btnLimpìar.Enabled = false;
                 btnCancelar.Text = "Salir";
                 this.Text = "Visualizar Datos de la Carga";
-                await CargarConsultaCargaIDAsync(this.nro);
+                await CargarConsultaCargaIDAsync(this.id);
             }
             //------------------------------------------------------------
             if (modo.Equals(Accion.EDITAR))
@@ -108,17 +107,17 @@ namespace TransporteFront.gui
                 CargarComboCamion();
                 CargarComboCarga();
                 this.Text = "Editar Carga";
-                await CargarConsultaCargaIDAsync(this.nro);
+                await CargarConsultaCargaIDAsync(this.id);
+                CargaMinimaYMaximaLabel(servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString()));
 
             }
         }
 
         
-        private async Task CargarConsultaCargaIDAsync(int idC)
+        private async Task CargarConsultaCargaIDAsync(int id)
         {
-            string url = "https://localhost:44311/api/Cargas/" + nro.ToString();
+            string url = "https://localhost:44311/api/Cargas/consulta/" + id.ToString();
             var resultado = await ClienteSingleton.GetInstance().GetAsync(url);
-
             this.oCarga = JsonConvert.DeserializeObject<Carga>(resultado);
 
             dgvDetalles.Rows.Clear();
@@ -140,7 +139,7 @@ namespace TransporteFront.gui
         {
             if (ExisteProductoEnGrilla(cboCarga.Text))
             {
-                MessageBox.Show("Producto ya agregado como detalle", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Producto ya agregado como parte de la carga", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -226,14 +225,14 @@ namespace TransporteFront.gui
 
                         if (updateOK)
                         {
-                            MessageBox.Show("El Cliente se ha Actualizado con éxito",
+                            MessageBox.Show("La Carga se ha Actualizado con éxito",
                                 "MENSAJE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LimpiarCampos();
                             this.Dispose();
                         }
                         else
                         {
-                            MessageBox.Show("El Cliente no pudo Actualizarse, consulte al Administrador",
+                            MessageBox.Show("La carga no pudo Actualizarse",
                                 "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
@@ -300,39 +299,39 @@ namespace TransporteFront.gui
             return true;
         }
 
-        private async Task<int> CargaMaximaASYNC(string patente)
-        {
-            string url = "https://localhost:44311/api/Cargas/" + patente.ToString();
-            var resultado = await ClienteSingleton.GetInstance().GetAsync(url);
-            int pesoMax = JsonConvert.DeserializeObject<int>(resultado);
-            
-            return pesoMax;
-
-            
-        }
-
         private void cboCamion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblCargaMaxima.Text = "Carga maxima" + servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString());
+            CargaMinimaYMaximaLabel(servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString()));
+            
         }
 
+        private void CargaMinimaYMaximaLabel(int Cmax)
+        {
+            int cargaMax = Cmax;
+            int pm = (cargaMax * 25) / 100;
+            int pesoMin = cargaMax - pm;
+            lblCargaMinima.Text = "Carga minima: " + pesoMin;
+            lblCargaMaxima.Text = "Carga maxima: " + cargaMax;
+        }
+        
         private bool CargaMaximaYMinima(string patente)
         {
             bool estado = true;
             int cargaMax = servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString());
             int pesoTotal = calcularPesosTotales();
-            int pesoMin = (cargaMax * 25) / 100;
+            int pm = (cargaMax * 25) / 100;
+            int pesoMin = cargaMax - pm;
 
             if(pesoTotal > cargaMax)
             {
-                MessageBox.Show("El peso de la carga Sobrepasa la capacidad del camion",
+                MessageBox.Show("El peso de la carga SOBREPASA la capacidad del camion",
                     "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dgvDetalles.Focus();
                 estado = false;
             }
             if(pesoMin > pesoTotal)
             {
-                MessageBox.Show("El peso de la carga es inferior al 75%.\n EL camion debe llevar mas carga",
+                MessageBox.Show("El peso de la carga es INFERIROR al 75%.\n EL Camion debe llevar mas carga",
                     "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dgvDetalles.Focus();
                 estado = false;
