@@ -24,5 +24,6 @@ namespace TransporteBack.AccesoADatos
         public bool SaveBajaCamion(string patente);
         public DataTable GetByFilterSP(string sp);
         public int GetPesoMax(string patente);
+        public int ConsultarEstado(string patente);
     }
 }

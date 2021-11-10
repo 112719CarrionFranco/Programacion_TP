@@ -31,7 +31,6 @@ namespace TransporteFront.gui
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Alta_Cargas));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblNumCarga = new System.Windows.Forms.Label();
             this.lblCargaMinima = new System.Windows.Forms.Label();
             this.lblCargaMaxima = new System.Windows.Forms.Label();
             this.lblPesoTotal = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@ namespace TransporteFront.gui
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTipoForm = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCarga)).BeginInit();
@@ -60,7 +60,7 @@ namespace TransporteFront.gui
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Cornsilk;
-            this.groupBox1.Controls.Add(this.lblNumCarga);
+            this.groupBox1.Controls.Add(this.lblEstado);
             this.groupBox1.Controls.Add(this.lblCargaMinima);
             this.groupBox1.Controls.Add(this.lblCargaMaxima);
             this.groupBox1.Controls.Add(this.lblPesoTotal);
@@ -81,20 +81,10 @@ namespace TransporteFront.gui
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // lblNumCarga
-            // 
-            this.lblNumCarga.AutoSize = true;
-            this.lblNumCarga.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNumCarga.Location = new System.Drawing.Point(367, 23);
-            this.lblNumCarga.Name = "lblNumCarga";
-            this.lblNumCarga.Size = new System.Drawing.Size(135, 19);
-            this.lblNumCarga.TabIndex = 15;
-            this.lblNumCarga.Text = "Numero de carga: ";
-            // 
             // lblCargaMinima
             // 
             this.lblCargaMinima.AutoSize = true;
-            this.lblCargaMinima.Location = new System.Drawing.Point(392, 87);
+            this.lblCargaMinima.Location = new System.Drawing.Point(349, 61);
             this.lblCargaMinima.Name = "lblCargaMinima";
             this.lblCargaMinima.Size = new System.Drawing.Size(85, 15);
             this.lblCargaMinima.TabIndex = 14;
@@ -103,7 +93,7 @@ namespace TransporteFront.gui
             // lblCargaMaxima
             // 
             this.lblCargaMaxima.AutoSize = true;
-            this.lblCargaMaxima.Location = new System.Drawing.Point(392, 72);
+            this.lblCargaMaxima.Location = new System.Drawing.Point(349, 39);
             this.lblCargaMaxima.Name = "lblCargaMaxima";
             this.lblCargaMaxima.Size = new System.Drawing.Size(87, 15);
             this.lblCargaMaxima.TabIndex = 13;
@@ -240,7 +230,7 @@ namespace TransporteFront.gui
             // cboCamion
             // 
             this.cboCamion.FormattingEnabled = true;
-            this.cboCamion.Location = new System.Drawing.Point(187, 72);
+            this.cboCamion.Location = new System.Drawing.Point(149, 53);
             this.cboCamion.Name = "cboCamion";
             this.cboCamion.Size = new System.Drawing.Size(181, 23);
             this.cboCamion.TabIndex = 4;
@@ -260,7 +250,7 @@ namespace TransporteFront.gui
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(81, 75);
+            this.label1.Location = new System.Drawing.Point(40, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 15);
             this.label1.TabIndex = 2;
@@ -275,6 +265,15 @@ namespace TransporteFront.gui
             this.txtTipoForm.Size = new System.Drawing.Size(151, 23);
             this.txtTipoForm.TabIndex = 1;
             this.txtTipoForm.Text = "Datos de la Carga:";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(349, 88);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(93, 15);
+            this.lblEstado.TabIndex = 1;
+            this.lblEstado.Text = "Estado Camion: ";
             // 
             // Frm_Alta_Cargas
             // 
@@ -320,6 +319,6 @@ namespace TransporteFront.gui
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn pesoTotal;
         private System.Windows.Forms.DataGridViewButtonColumn accion;
-        private System.Windows.Forms.Label lblNumCarga;
+        private System.Windows.Forms.Label lblEstado;
     }
 }

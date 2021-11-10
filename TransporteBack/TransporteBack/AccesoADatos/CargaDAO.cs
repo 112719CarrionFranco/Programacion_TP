@@ -107,5 +107,10 @@ namespace TransporteBack.AccesoADatos
         {
             return HelperDAO.ObtenerInstancia().GetPesoMax("SP_CARGA_MAX", patente);
         }
+
+        public int ConsultarEstado(string patente)
+        {
+            return HelperDAO.ObtenerInstancia().GetEstado("SP_ESTADO_CAMION", patente);
+        }
     }
 }

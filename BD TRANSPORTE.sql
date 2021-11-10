@@ -234,10 +234,21 @@ AS
 	
 
 
+ALTER PROCEDURE SP_ESTADO_CAMION 
+@patente varchar(7),
+@estado int output
+as
+
+
+	IF((SELECT ESTADO FROM CAMIONES where @patente = PATENTE) = 'DISPONIBLE')
+		SET @estado = 1
+	ELSE
+		SET @estado = 0
 
 
 
+declare @estado int
+exec SP_ESTADO_CAMION 'JFK582', @estado output 
 
-
-
+select @estado
 

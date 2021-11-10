@@ -172,6 +172,44 @@ namespace TransporteBack.AccesoADatos
             return PesoMax;
         }
 
+        public int GetEstado(string nombreSP, string patente)
+        {
+            SqlConnection cnn = new SqlConnection();
+            bool resultado = true;
+            int estado = 0;
+
+            try
+            {
+                cnn.ConnectionString = cadenaConexion;
+                cnn.Open();
+
+                SqlCommand cmd = new SqlCommand(nombreSP, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@patente", patente);
+
+                SqlParameter param = new SqlParameter("@estado", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(param);
+
+                cmd.ExecuteNonQuery();
+                estado = Convert.ToInt32(param.Value);
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+
+
+            return estado;
+        }
+
         public int EjecutarSQL(string nombreSP, Dictionary<string, object> parametros)
         {
             SqlConnection cnn = new SqlConnection();

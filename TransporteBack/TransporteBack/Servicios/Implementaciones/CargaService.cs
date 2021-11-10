@@ -58,10 +58,6 @@ namespace TransporteBack.Servicios.Implementaciones
             return dao.ControlUsuarios(usuario, pass);
         }
 
-        public Carga ObtenerCargaPorNro(int nro)
-        {
-            throw new NotImplementedException();
-        }
 
         
         public bool GuardarCamion(Camion oCamion)
@@ -87,6 +83,11 @@ namespace TransporteBack.Servicios.Implementaciones
         public int ConsultaPesoMax(string patente)
         {
             return dao.GetPesoMax(patente);
+        }
+
+        public int ConsultaEstado(string patente)
+        {
+            return dao.ConsultarEstado(patente);
         }
     }
 }

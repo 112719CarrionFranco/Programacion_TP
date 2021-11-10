@@ -28,6 +28,7 @@ namespace TransporteFront.gui
         private Accion modo;
         private int id;
         private IService servicio;
+        int primera = 0;
 
         public Frm_Alta_Cargas(Accion modo, int id)
         {
@@ -191,53 +192,66 @@ namespace TransporteFront.gui
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
 
-
-            if (CargaMaximaYMinima(cboCamion.Text))
+            if (EstadoCamion(cboCamion.Text))
             {
-                if (modo.Equals(Accion.NUEVO))
+                if (CargaMaximaYMinima(cboCamion.Text))
                 {
-                    if (ValidarCampos())
+
+                    if (modo.Equals(Accion.NUEVO))
                     {
-                        oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
-                        oCarga.Patente = (cboCamion.Text);
-                        var saveOK = await RegistrarCargaAsync(oCarga);
-
-
-                        if (saveOK)
+                        if (ValidarCampos())
                         {
-                            MessageBox.Show("Carga registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
+                            oCarga.Patente = (cboCamion.Text);
+                            var saveOK = await RegistrarCargaAsync(oCarga);
 
+
+                            if (saveOK)
+                            {
+                                MessageBox.Show("Carga registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("ERROR. No se pudo registrar la carga", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
-                        else
+                    }
+                    if (modo.Equals(Accion.EDITAR))
+                    {
+                        if (ValidarCampos())
                         {
-                            MessageBox.Show("ERROR. No se pudo registrar la carga", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
+                            oCarga.Patente = (cboCamion.Text);
+
+                            var updateOK = await ActualizarCargaAsync(oCarga);
+
+                            if (updateOK)
+                            {
+                                MessageBox.Show("La Carga se ha Actualizado con éxito",
+                                    "MENSAJE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                LimpiarCampos();
+                                this.Dispose();
+                            }
+                            else
+                            {
+                                MessageBox.Show("La carga no pudo Actualizarse",
+                                    "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
-                if (modo.Equals(Accion.EDITAR))
+                else
                 {
-                    if (ValidarCampos())
-                    {
-                        oCarga.PesoTotal = Convert.ToInt32(calcularPesosTotales());
-                        oCarga.Patente = (cboCamion.Text);
-
-                        var updateOK = await ActualizarCargaAsync(oCarga);
-
-                        if (updateOK)
-                        {
-                            MessageBox.Show("La Carga se ha Actualizado con éxito",
-                                "MENSAJE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LimpiarCampos();
-                            this.Dispose();
-                        }
-                        else
-                        {
-                            MessageBox.Show("La carga no pudo Actualizarse",
-                                "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+                    return;
                 }
+                
             }
+            else
+            {
+                return;
+            }
+            
         }
 
         private async Task<bool> ActualizarCargaAsync(Carga oCarga)
@@ -301,8 +315,15 @@ namespace TransporteFront.gui
 
         private void cboCamion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CargaMinimaYMaximaLabel(servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString()));
             
+            CargaMinimaYMaximaLabel(servicio.ConsultaPesoMax(cboCamion.SelectedValue.ToString()));
+            if (primera != 0)
+            {
+                EstadoCamion(cboCamion.Text);
+            }
+            primera = primera + 1;
+
+
         }
 
         private void CargaMinimaYMaximaLabel(int Cmax)
@@ -312,6 +333,26 @@ namespace TransporteFront.gui
             int pesoMin = cargaMax - pm;
             lblCargaMinima.Text = "Carga minima: " + pesoMin;
             lblCargaMaxima.Text = "Carga maxima: " + cargaMax;
+        }
+
+        private bool EstadoCamion(string patente)
+        {
+            int estado = servicio.ConsultaEstado(patente);
+            bool resultado = false;
+
+            if (estado == 1)
+            {
+                resultado = true;
+                lblEstado.Text = "Estado del camion: Disponible";
+            }
+            else
+            {
+                resultado = true;
+                lblEstado.Text = "Estado del camion: Fuera de Servicio";
+                MessageBox.Show("El camion NO se encuentra disponible para despachar cargas",
+                    "Validaciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return resultado;
         }
         
         private bool CargaMaximaYMinima(string patente)

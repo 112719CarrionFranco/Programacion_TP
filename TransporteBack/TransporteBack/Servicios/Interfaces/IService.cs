@@ -23,6 +23,8 @@ namespace TransporteBack.Servicios
         public bool RegistrarBajaCamion(string patente);
         public DataTable ConsultarSP(string sp);
         public int ConsultaPesoMax(string patente);
+        public int ConsultaEstado(string patente);
+
 
     }
 }

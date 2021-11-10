@@ -37,7 +37,6 @@ namespace TransporteFront.gui
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.gbResultados = new System.Windows.Forms.GroupBox();
-            this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dgvCamiones = new System.Windows.Forms.DataGridView();
             this.patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,7 +107,6 @@ namespace TransporteFront.gui
             // 
             // gbResultados
             // 
-            this.gbResultados.Controls.Add(this.btnEditar);
             this.gbResultados.Controls.Add(this.btnEliminar);
             this.gbResultados.Controls.Add(this.dgvCamiones);
             this.gbResultados.Location = new System.Drawing.Point(12, 84);
@@ -117,15 +115,6 @@ namespace TransporteFront.gui
             this.gbResultados.TabIndex = 0;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Resultados";
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Location = new System.Drawing.Point(520, 178);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 23);
-            this.btnEditar.TabIndex = 2;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
@@ -215,7 +204,6 @@ namespace TransporteFront.gui
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvCamiones;
-        private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn patente;
         private System.Windows.Forms.DataGridViewTextBoxColumn marca;
