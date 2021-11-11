@@ -63,10 +63,6 @@ namespace TransporteBack.AccesoADatos
             return HelperDAO.ObtenerInstancia().GetById(nro);
         }
 
-        public int ObtenerProximoNroCarga()
-        {
-            return HelperDAO.ObtenerInstancia().ProximoID("SP_PROXIMO_ID", "@next");
-        }
 
         public bool RegistrarBajaCarga(int nroCarga)
         {

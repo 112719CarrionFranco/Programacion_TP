@@ -11,7 +11,6 @@ namespace TransporteBack.AccesoADatos
 {
     public interface ICargaDAO
     {
-        public int ObtenerProximoNroCarga();
         public DataTable ListarProductos();
         public bool Crear(Carga oCarga);
         public Carga ObtenerCargaPorID(int nro);

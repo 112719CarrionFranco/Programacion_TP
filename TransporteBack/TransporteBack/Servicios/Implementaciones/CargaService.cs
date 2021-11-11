@@ -43,10 +43,6 @@ namespace TransporteBack.Servicios.Implementaciones
             return dao.ObtenerCargaPorID(nro);
         }
 
-        public int ObtenerProximoNroCarga()
-        {
-            return dao.ObtenerProximoNroCarga();
-        }
 
         public bool RegistrarBajaCarga(int nroCarga)
         {

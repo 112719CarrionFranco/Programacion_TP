@@ -10,7 +10,6 @@ namespace TransporteBack.Servicios
 {
     public interface IService
     {
-        public int ObtenerProximoNroCarga();
         public DataTable ListarProductos();
         public bool Crear(Carga oCarga);
         public Carga ObtenerCargaPorID(int nro);
